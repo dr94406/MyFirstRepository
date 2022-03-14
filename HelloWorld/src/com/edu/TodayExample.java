@@ -11,7 +11,19 @@ public class TodayExample {
 // 연락처 :010-9176-4428
 // 나이: 23
 // 키 :172
-// 적정몸무게 : (키 - 100) * 0.9 => 60.3 +- 5키로...55.3< < 65.3
+// 적정몸무게 : (키 - 100) * 0.9 => 60.3 +- 5키로...55.3< < 65.3 크면 과체중 작으면 저체중
+// +- 5키로... 55.3< < 65.3
+		double weight = 80; // 72.5 ~ 62.5 사이에 적정
+		
+		double realWeight = 69.3; // 30 
+				
+		if(weight+5>realWeight && weight-5<realWeight) {
+			System.out.println("적정몸무게입니다.");
+		} else {
+			System.out.println("비정상입니다.");
+			
+		}
+
 
 
 		String name,tel;
