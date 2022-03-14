@@ -13,7 +13,28 @@ public class TodayExample {
 // 키 :172
 // 적정몸무게 : (키 - 100) * 0.9 => 60.3 +- 5키로...55.3< < 65.3 크면 과체중 작으면 저체중
 // +- 5키로... 55.3< < 65.3
-		double weight = 80; // 72.5 ~ 62.5 사이에 적정
+		
+
+	
+		
+		String name,tel;
+		int age;
+		double tall; 
+		double weight;
+		double bmi;
+		System.out.println("이름 " + name + "입니다.");
+		name = scn.nextLine();
+		System.out.println("전화번호 " + tel + "입니다.");
+		tel = scn.nextLine();
+		System.out.println("나이 " + age + "살입니다.");
+		age = scn.nextInt();
+		System.out.println("키 " + tall + "cm입니다.");
+		tall = scn.nextDouble();
+		System.out.println("적정몸무게 " + bmi + "kg입니다.");
+		weight =scn.nextDouble();
+		System.out.println();
+
+		
 		
 		double realWeight = 69.3; // 30 
 				
@@ -23,25 +44,6 @@ public class TodayExample {
 			System.out.println("비정상입니다.");
 			
 		}
-
-
-
-		String name,tel;
-		int age;
-		double tall;
-		double bmi;
-		
-		name = scn.nextLine();
-		tel = scn.nextLine();
-		age = scn.nextInt();
-		tall = scn.nextDouble();
-		bmi = (tall - 100) * 0.9;
-		System.out.println("이름 " + name + "입니다.");
-		System.out.println("전화번호 " + tel + "입니다.");
-		System.out.println("나이 " + age + "살입니다.");
-		System.out.println("키 " + tall + "cm입니다.");
-		System.out.println("적정몸무게 " + bmi + "kg입니다.");
-
 
 	
 
