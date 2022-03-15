@@ -24,12 +24,12 @@ public class WhileExample4 {
 			} else if (menu == 2) {
 				System.out.println("출금액을 입력하세요...");
 				account -= scn.nextInt();
-				System.out.println("현재 잔액은" + account + "입니다.");
-			} else if (menu == 3) {
+				System.out.println("현재 잔액은" + account + "원입니다.");}
+			 else if (menu == 3) {
 				break;
 			}
-			System.out.println("end of program");
 		}
+		System.out.println("end of program");
 
 	}
 }
