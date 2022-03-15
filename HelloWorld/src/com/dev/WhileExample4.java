@@ -23,9 +23,18 @@ public class WhileExample4 {
 				System.out.println("현재 잔액은 " + account + "입니다.");
 			} else if (menu == 2) {
 				System.out.println("출금액을 입력하세요...");
-				account -= scn.nextInt();
-				System.out.println("현재 잔액은" + account + "원입니다.");}
-			 else if (menu == 3) {
+				int amt = scn.nextInt();
+				
+				if (amt > account) { // 잔액부족..
+					System.out.println("잔액을 초과합니다.");
+					System.out.println("현재 잔액: " + account);
+					continue; // 구문 아래를 무시 다음 순번으로 넘어감.
+				}
+				// 정상 출금..
+				account -= amt;
+				System.out.println("현재 잔액은" + account + "원입니다.");
+				
+			} else if (menu == 3) { // 종료일 경우
 				break;
 			}
 		}
