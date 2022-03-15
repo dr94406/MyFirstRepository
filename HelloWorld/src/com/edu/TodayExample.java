@@ -22,17 +22,18 @@ public class TodayExample {
 		double tall; 
 		double weight;
 		double bmi;
-		System.out.println("이름 " + name + "입니다.");
 		name = scn.nextLine();
-		System.out.println("전화번호 " + tel + "입니다.");
 		tel = scn.nextLine();
-		System.out.println("나이 " + age + "살입니다.");
 		age = scn.nextInt();
-		System.out.println("키 " + tall + "cm입니다.");
 		tall = scn.nextDouble();
-		System.out.println("적정몸무게 " + bmi + "kg입니다.");
 		weight =scn.nextDouble();
-		System.out.println();
+		bmi = scn.nextDouble();
+		System.out.println("이름 " + name + "입니다.");
+		System.out.println("전화번호 " + tel + "입니다.");
+		System.out.println("나이 " + age + "살입니다.");
+		System.out.println("키 " + tall + "cm입니다.");
+		System.out.println("적정몸무게 " + bmi + "kg입니다.");
+	
 
 		
 		
