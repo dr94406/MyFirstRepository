@@ -44,9 +44,7 @@ public class User {
 
 	public String getuserInfo() {
 		String result = this.userId + "의 등급은" + //
-				this.userGrade + " 이고 번호는 " + //
-				this.userPhone + " 이고 포인트는  " + //
-				this.userPoint + "입니다.";
+				this.userGrade + "입니다." + "김형민의 포인트는" + this.userPoint + " 입니다.";
 		return result;
 
 	}

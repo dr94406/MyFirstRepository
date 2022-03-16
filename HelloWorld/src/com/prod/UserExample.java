@@ -10,7 +10,7 @@ public class UserExample {
 		user1.setuserPoint(1000);
 
 		User user2 = new User();
-		user2.setuserId("전민욱");
+		user2.setuserId("김주환");
 		user2.setuserGrade("B");
 		user2.setuserPhone("010-1098-7654");
 		user2.setuserPoint(1300);
@@ -33,11 +33,13 @@ public class UserExample {
 		user5.setuserPhone("010-3456-7890");
 		user5.setuserPoint(2000);
 
+		System.out.println(user1.getuserInfo());
+
 		User[] user = { user1, user2, user3, user4, user5 };
 
 		for (int i = 0; i < user.length; i++) {
 			if (user[i].getuserGrade() == "A" && user[i].getuserPoint() >= 1000) {
-				System.out.println(user[i].getuserInfo());
+//				System.out.println(user[i].getuserInfo());
 			}
 
 		}
