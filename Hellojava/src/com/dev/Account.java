@@ -8,7 +8,7 @@
 		private String accName;
 		private int money;
 
-		// constructor
+		// constructor:생성자. 목적은 필드의 초기값을 지정.
 		public Account(String accNo, String accName, int money) { // 계좌정보, 예금주, 예금액
 			super();
 			this.accNo = accNo;
