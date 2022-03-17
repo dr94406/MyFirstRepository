@@ -16,6 +16,23 @@ public class CarExample {
 		sonata.addSpeed();
 		System.out.println("현재속도: " + sonata.getSpeed() + "km입니다.");
 		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		sonata.breakSpeed();
+		
 		System.out.println("현재속도: " + sonata.getSpeed() + "km입니다.");
 	}
 }
