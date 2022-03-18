@@ -2,8 +2,9 @@ package com.dev;
 
 import java.util.Scanner;
 
+
 // BankApp(main method), Account(계좌번호,예금주,잔액) 
-public class BankApp { // BankApp 클래스를 실행, 메인메소드를 우선순위로 실행. [line 17]
+public class BankAppCopy { // BankApp 클래스를 실행, 메인메소드를 우선순위로 실행. [line 17]
 	static Account[] banks = new Account[100];
 	static Scanner scn = new Scanner(System.in);
 
@@ -30,8 +31,6 @@ public class BankApp { // BankApp 클래스를 실행, 메인메소드를 우선
 			} else if (menu == 4) {
 				findAccountMoney();
 			} else if (menu == 5) {
-				transferAmount();
-			} else if (menu == 6) {
 				System.out.println("프로그램을 종료합니다.");
 				break;
 			} else if (menu == 9) {
@@ -44,21 +43,16 @@ public class BankApp { // BankApp 클래스를 실행, 메인메소드를 우선
 
 	// 메뉴출력 기능.
 	public static void printMenu() {
-		String menu = "=========================================================\r\n" //
-				+ "1.계좌생성(번호,예금주,예금액)\r\n" //
-				+ "2.예금(번호,예금액) -> 최고예금액 100,000원.\r\n" //
-				+ "3.출금(번호,출금액) -> 잔액보다 큰 금액 출금 못하도록.\r\n" //
-				+ "4.잔액조회(번호)\r\n" //
-				+ "5.송금(송금번호, 금액, 입금번호)\r\n" // transferAmount()
-				+ "6.종료\r\n" //
-				+ "=========================================================\r\n" + "+선택>	";
+		String menu = "=========================================================\r\n" + "1.계좌생성(번호,예금주,예금액)\r\n"
+				+ "2.예금(번호,예금액) -> 최고예금액 100,000원.\r\n" + "3.출금(번호,출금액) -> 잔액보다 큰 금액 출금 못하도록.\r\n" + "4.잔액조회(번호)\r\n"
+				+ "5.종료\r\n" + "9.전체 값 확인(입력해야만 발동한다)\r\n" + "=========================================================\r\n" + "+선택>	";
 
 		System.out.println(menu);
 	}
 
-	// 계좌생성 메소드. // while문
+	// 계좌생성 메소드.
 	public static void createAccout() {
-		System.out.println("계좌생성.");
+		System.out.println("계좌생성가능.");
 		String accNo;
 
 		while (true) {
@@ -87,38 +81,15 @@ public class BankApp { // BankApp 클래스를 실행, 메인메소드를 우선
 			break;
 		}
 	}
-	// 계좌생성 메소드 //이프문
-//  public static void createAccount() {
-//     System.out.println("계좌생성기능");
-//    System.out.println("계좌번호입력>> ");
-//    String accNo = scn.next();
-//    System.out.println("예금주입력>> ");
-//    String accName = scn.next();
-//    System.out.println("예금액입력>> ");
-//    int accMoney = scn.nextInt();
-//    //계좌번호 있는지 체크
-//    if(searchAccountNo(accNo) !=null) {
-//       System.out.println("이미 있는 계좌번호입니다.");
-//       return;
-//    }
-//    
-//    Account accnt = new Account(accNo, accName, accMoney);
-//    
-//    for(int i=0; i < banks.length; i++) {
-//       if(banks[i] == null) {
-//          banks[i] = accnt;
-//          break;
-//       }
 
 	// 예금 메소드.
 	public static void deposit() {
 		System.out.println("예금기능.");
 		System.out.println("계좌번호>>");
-		String ano = scn.next(); // 계좌 생성구문 당기기
+		String ano = scn.next(); // 계좌생성 당기기
 		System.out.println("예금액 입력>>");
-		int amt = scn.nextInt(); // 입금 할 금
+		int amt = scn.nextInt();
 		int checkCnt = 0; // 조회가 됐는지 체크 여부 변수.
-
 		for (int i = 0; i < banks.length; i++) {
 			if (banks[i] != null && banks[i].getAccNo().equals(ano)) { // 계좌번호 있을 경우..
 				// 계좌번호 조회됐을 때..
@@ -150,8 +121,7 @@ public class BankApp { // BankApp 클래스를 실행, 메인메소드를 우선
 	public static void withdraw() {
 		System.out.println("출금기능.");
 		System.out.println("계좌번호>>");
-		String amt = scn.next(); // 임의의 값 넣기
-		int outMoney = scn.nextInt();
+		String amt = scn.next(); //위에 입력한 int를 들고옴 
 		System.out.println("출금액 입력.");
 		int checkCnt = 0; // 조회가 됐는지 체크 여부 변수.
 		for (int i = 0; i < banks.length; i++) {
@@ -160,9 +130,11 @@ public class BankApp { // BankApp 클래스를 실행, 메인메소드를 우선
 				checkCnt = 1;
 				int currAmt = banks[i].getMoney();
 				System.out.println("출금하실 금액을 입력하세요");
+				int outMoney = scn.nextInt();
 				// 출금액이 10만원을 초과하지 못하도록..
 				if (currAmt - outMoney < 0) {
 					checkCnt = 2;
+
 					break;
 				}
 				banks[i].setMoney(currAmt - outMoney); // 잔액 + 출금액
@@ -178,89 +150,28 @@ public class BankApp { // BankApp 클래스를 실행, 메인메소드를 우선
 		}
 	}
 
-	// 잔액조회 메소드. // 내가 만든 것
-//	public static void findAccountMoney() {
-//		System.out.println("조회기능.");
-//		System.out.println("계좌번호>");
-//		String num1 = scn.next();
-//		int checkCnt = 0; // 조회가 됐는지 체크 여부 변수.
-//		for (int i = 0; i < banks.length; i++) {
-//			if (banks[i] != null && banks[i].getAccNo().equals(num1)) { // 계좌번호 있을 경우..
-//				// 계좌번호 조회됐을 때..
-//				checkCnt = 1;
-//				int currAmt = banks[i].getMoney();
-//				banks[i].setMoney(currAmt);
-//				
-//			}
-//			if (checkCnt == 1) {
-//				System.out.println("잔액은 " + banks[i].getMoney() + " 원입니다.");
-//			} else if (checkCnt == 2) {
-//				System.out.println("잔액을 조회할 수 없습니다.");
-//			}
-//			break;
-//		}
 	// 잔액조회 메소드.
 	public static void findAccountMoney() {
 		System.out.println("조회기능.");
-		System.out.println("계좌번호>>");
-		String ano = scn.next();
-		Account findAccount = searchAccountNo(ano); // No = 없다.
-		if (findAccount == null) {
-			System.out.println("계좌가 존재하지 않습니다.");
-			return;
-		}
-		System.out.println("잔액: " + findAccount.getMoney());
-
-	}
-
-	// 송금 메소드.
-	public static void transferAmount() {
-		System.out.print("송금 할 계좌번호>>");
-		String sendAccntNo = scn.next();
-		System.out.println("송금할 금액>>");
-		int amt = scn.nextInt();
-		System.out.print("입금 받을 계좌번호>>");
-		String receiveAccntNo = scn.next();
-		
-		Account sendAccnt = searchAccountNo(sendAccntNo);
-		Account receiveAccnt = searchAccountNo(receiveAccntNo);
-		
-		if (sendAccntNo.equals(receiveAccntNo)) {
-			System.out.println("송금계좌와 입금계좌가 동일합니다.");
-			return;
-		} else if   (sendAccnt == null) {
-		 	System.out.println("송금계좌가 정확하지 않습니다.");
-		} else if (receiveAccnt == null) {
-			System.out.println("입금계좌 정보가 정확하지 않습니다.");
-		}
+		System.out.println("계좌번호를 입력하세요.");
+		String num1 = scn.next();
 		int checkCnt = 0; // 조회가 됐는지 체크 여부 변수.
-//		}
-//		for (int i = 0; i < banks.length; i++) {
-//			if (banks[i] != null && banks[i].getAccNo().equals(sendAccountNum)) {
-//				checkCnt = 1;
-//				{
-//					int currsendAccountNum = banks[i].getMoney();
-//					System.out.println("송금액 입력>>");
-//					int outMoney = scn.nextInt();
-//					// 송금액 10만원 초과불가...
-//					if (currsendAccountNum - outMoney < 0) {
-//						checkCnt = 2;
-//
-//						break;
-//					}
-//					banks[i].setMoney(currsendAccountNum - outMoney);
-//					break;
-//				}
+		for (int i = 0; i < banks.length; i++) {
+			if (banks[i] != null && banks[i].getAccNo().equals(num1)) { // 계좌번호 있을 경우..
+				// 계좌번호 조회됐을 때..
+				checkCnt = 1;
+				int currAmt = banks[i].getMoney();
+				banks[i].setMoney(currAmt);
+				
 			}
-//		if (checkCnt ==1) {
-//			System.out.println("정상적으로 송금처리 되었습니다.");
-//		} else if (checkCnt == 2) {
-//			System.out.println("한도액을 초과헀습니다.");
-//		} else {
-//			System.out.println("계좌번호가 없습니다.");
-//			}
-//		}
-//	}
+			if (checkCnt == 1) {
+				System.out.println("잔액은 " + banks[i].getMoney() + " 원입니다.");
+			} else if (checkCnt == 2) {
+				System.out.println("잔액을 조회할 수 없습니다.");
+			}
+			break;
+		}
+	}
 
 	// 전체리스트 출력.
 	public static void showList() {
@@ -282,3 +193,15 @@ public class BankApp { // BankApp 클래스를 실행, 메인메소드를 우선
 		return null; // 클래스 -> null(Student, Car,
 	}
 }
+
+
+//public static void findAccountMoney() {
+//	System.out.println("조회기능.");
+//	System.out.println("계좌번호>>");
+//	String ano = scn.next();
+//	Account findAccount = searchAccountNo(ano); // No = 없다. 
+//	if (findAccount == null) {
+//		System.out.println("계좌가 존재하지 않습니다.");
+//		return;
+//	}
+//	System.out.println("잔액: " + findAccount.getMoney());

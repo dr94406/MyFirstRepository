@@ -6,6 +6,10 @@ import com.edu.Student;
 
 public class ObjectExample {
 	public static void main(String[] args) {
+		
+		Student stud = null;
+		stud.getAvgScore();
+		
 		Scanner scn = new Scanner(System.in);
 
 		Student s1 = new Student(100, "이가영"); // studenNo = 100
