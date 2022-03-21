@@ -62,7 +62,7 @@ public class LibraryExe {
 		for (int i = 0; i < str.length(); i++) {
 			System.out.print(str.charAt(i));
 			try {
-				Thread.sleep(1);// 300>0.3초
+				Thread.sleep(20);// 300>0.3초
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
