@@ -13,7 +13,7 @@ public class Book {
 
 	public void showInfo() {
 		System.out.println("=======================================================");
-		System.out.println("책제목: " + this.title + "저자는 " + this.author + "가격은" + this.price);
+		System.out.println("책제목: " + this.title + " 저자는 " + this.author+"이며" + " 가격은" + this.price + "원입니다.");
 		System.out.println("=======================================================");
 	}
 

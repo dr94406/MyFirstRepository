@@ -1,8 +1,8 @@
 package com.edu;
 
-public class Bus extends Vehicle {
+public class Bus extends Vehicle implements Runnable {
 
-	public Bus () {
+	public Bus() {
 		super.setMaxSpeed(110);
 	}
 
@@ -14,13 +14,12 @@ public class Bus extends Vehicle {
 	@Override
 	public void stop() {
 		System.out.println("Bus 가 멈춥니다.");
-	
+
 	}
 
 	@Override
 	public String toString() {
 		return "버스의 최고속도는 " + getMaxSpeed() + "입니다.";
-	
-	}
-	}
 
+	}
+}

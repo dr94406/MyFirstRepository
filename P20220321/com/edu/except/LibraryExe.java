@@ -3,8 +3,24 @@ package com.edu.except;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+// 클래스A, 클래스B, 클래스C..... 클래스Z
+// 클래스 main > main 메소드 포함
+
 public class LibraryExe {
-	public static void main(String[] args) {
+
+	private static LibraryExe singleton = new LibraryExe();
+
+	private LibraryExe() {
+
+	}
+
+	public static LibraryExe getInstance() {
+		return singleton;
+	}
+
+//	public static void main(String[] args) {
+	public void run() {
+
 		// 책제목, 저자, 가격 -> 저장.
 		// 리스트 보여주기.
 		Scanner scn = new Scanner(System.in);
@@ -14,7 +30,7 @@ public class LibraryExe {
 			int menu = 0;
 
 			while (true) {
-				showMessage("메뉴 선택: 1.책 정보입력, 2.리스트 보기, 3.종료");
+				showMessage("메뉴선택: 1.책정보입력, 2.리스트보기, 3.종료");
 				try {
 					menu = scn.nextInt();
 					break;
@@ -62,7 +78,7 @@ public class LibraryExe {
 		for (int i = 0; i < str.length(); i++) {
 			System.out.print(str.charAt(i));
 			try {
-				Thread.sleep(300);// 300>0.3초
+				Thread.sleep(20);// 300>0.3초 20 정도가 적당한듯.
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
