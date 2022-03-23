@@ -10,7 +10,7 @@ public class Exam2 {
 		for (int i = 0; i < intAry.length; i++) {
 			System.out.println("실수를 입력하세요>>");
 			intAry[i] = scn.nextDouble();
-		
+
 		}
 	}
 
