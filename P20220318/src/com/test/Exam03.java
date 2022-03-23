@@ -2,36 +2,24 @@ package com.test;
 
 import java.util.Scanner;
 
-//문제3) 정수형배열 선언하고 사용자로 세개의 정수값을 입력받아서 배열에 저장. 제일 큰값을 구하는 코드를 작성.
+//문제3) 정수형배열 선언하고 사용자로 세개의 정수값을
+//입력받아서 배열에 저장. 제일 큰값을 구하는 코드를 작성.
 public class Exam03 {
 	public static void main(String[] args) {
-		Scanner scn = new Scanner(System.in);
+		Scanner scn = new Scanner(System.in); // ctrl+shift+o 임포트문
+		int[] intAry = new int[4];
 
-		int[] min = new int[3];
-
-		for (int i = 0; i < 3; i++) {
-			System.out.println("수를 입력하세요.");
-			min[i] = scn.nextInt();
+		for (int i = 0; i < intAry.length; i++) {
+			System.out.println("정수를 입력하세요>> ");
+			intAry[i] = scn.nextInt();
 		}
-
-		if (min[0] > min[1] && min[1] > min[2]) {
-			System.out.println("가장 큰 수는 " + min[0]);
+		// 배열에 값이 3개 저장. [34, 23, 56] 임의의 수이다.
+		int maxValue = intAry[0]; // 0,1,2 순이니 34가 0이다.
+		for (int i = 0; i < intAry.length; i++) {
+			if (intAry[i] > maxValue) {
+				maxValue = intAry[i];
+			}
 		}
-		if (min[0] > min[2] && min[2] > min[1]) {
-			System.out.println("가장 큰 수는 " + min[0]);
-		}
-		if (min[1] > min[0] && min[0] > min[2]) {
-			System.out.println("가장 큰 수는 " + min[1]);
-		}
-		if (min[1] > min[2] && min[2] > min[0]) {
-			System.out.println("가장 큰 수는 " + min[1]);
-		}
-		if (min[2] > min[0] && min[0] > min[1]) {
-			System.out.println("가장 큰 수는 " + min[2]);
-		}
-		if (min[2] > min[1] && min[1] > min[0]) {
-			System.out.println("가장 큰 수는 " + min[2]);
-		}
-		scn.close();
+		System.out.println("최대값: " + maxValue);
 	}
 }

@@ -1,69 +1,23 @@
 package com.test;
 
-// 책(책 제목, 저자, 출판사, 가격)
-
-// Book클래스를 선언(필드:책제목, 저자, 출판사, 금액) 
 public class Book {
+// 책제목, 저자, 출판사, 금액
+	private String title;
+	private String author;
+	private String press;
+	private int price;
 
-	// 책 이름, 필드
-	private String Name;
-	private String Writer;
-	private String Pub;
-	private int Price;
-
-	public Book(String Name, String Writer, String Pub, int Price) {
+	public Book(String title, String author, String press, int price) {
 		super();
-		this.Name = Name;
-		this.Writer = Writer;
-		this.Pub = Pub;
-		this.Price = Price;
-
+		this.title = title;
+		this.author = author;
+		this.press = press;
+		this.price = price;
 	}
 
-	// 생성자: 필드의 값을 초기화.. // 이름,저자,출판사,가격
+	public void showInfo() {
+		System.out.printf("책정보 [제목: %-10s 저자: %-10s 출판사: %-10s 가격: %5d]\n", //
+				title, author, press,price);
 
-	// 메소드
-
-	public String getName() {
-		return Name;
-	}
-
-	public void setName(String name) {
-		this.Name = name;
-	}
-
-	public String getWriter() {
-		return Writer;
-	}
-
-	public void setWriter(String Writer) {
-		this.Writer = Writer;
-	}
-
-	public String getPub() {
-		return Pub;
-	}
-
-	public void setPub(String pub) {
-		this.Pub = pub;
-	}
-
-	public int getPrice() {
-		return Price;
-	}
-
-	public void setPrice(int price) {
-		this.Price = price;
-	}
-
-	public void printInfo() {
-
-		String str = "------------------\n" //
-				+ " 제목\t" + this.Name + "\n" //
-				+ " 저자\t" + this.Writer + "\n" //
-				+ " 출판사\t" + this.Pub + "\n" //
-				+ " 금액\t" + this.Price + "\n" //
-				+ "------------------";
-		System.out.println(str);
 	}
 }
