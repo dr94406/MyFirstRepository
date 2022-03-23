@@ -5,7 +5,7 @@ import java.util.Calendar;
 public class CalendarExample {
 	public static void main(String[] args) {
 
-		int year = 2022;
+		int year = 2022; 
 		int month = 2; // +1월을 해야한다.
 		int day = 1; // 오늘이 1일이라는 의미이다.
 		creatCalendar(year, month, day);
