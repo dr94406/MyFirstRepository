@@ -15,6 +15,12 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
+	public void removeStudent(int num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public List<Student> studentList() {
 		return null;
 	}
@@ -22,6 +28,11 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public void modifyStudent(Student student) {
 
+	}
+
+	@Override
+	public List<Student> searchStudent(String name) { 
+		return null;
 	}
 
 }
