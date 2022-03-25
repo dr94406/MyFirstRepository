@@ -11,4 +11,5 @@ public interface StudentService {
 	public void removeStudent(int del); // 한건삭제.
 	public List <Student> searchStudent(String name);  // 이름조회. 한 건이 아니고 여러건을 반영하는 컬렉션타입.
 	
+	
 }
