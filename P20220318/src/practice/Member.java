@@ -22,7 +22,7 @@ public class Member {
 		this.memberName = memberName;
 	}
 
-	public Member() { // 생성자를 선언함으로 코드의 간결화 및 필요한 기능을 추가합니다.
+	public Member(int memberId, String memberName, String phone) { // 생성자를 선언함으로 코드의 간결화 및 필요한 기능을 추가합니다.
 		super();
 		this.memberId = memberId;
 		this.memberName = memberName;

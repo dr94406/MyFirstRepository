@@ -10,8 +10,8 @@ public class SwimMember extends Member { // Member 의 변수를 상속해서 �
 	private String swimName;
 	private String swimClass;
 
-	public SwimMember(String swimName, String swimClass) { // 생성자를 선언해주겠습니다.
-		super();
+	public SwimMember(int memberId, String memberName, String phone, String swimName, String swimClass) { // 생성자를 선언해주겠습니다.
+		super(memberId, memberName, phone);
 		this.swimName = swimName;
 		this.swimClass = swimClass;
 	}
@@ -34,7 +34,7 @@ public class SwimMember extends Member { // Member 의 변수를 상속해서 �
 
 	@Override
 	public String toString() {
-		return "SwimMember [swimName=" + swimName + ", swimClass=" + swimClass + ", getMemberId()=" + getMemberId()
-				+ ", getMemberName()=" + getMemberName() + ", getPhone()=" + getPhone() + "]";
+		return " [강사의 이름은 =" + swimName + ", 수영등급은=" + swimClass + ", 회원의 아이디는 =" + getMemberId()
+				+ ", 회원의 이름은 =" + getMemberName() + ", 회원의 휴대전화 번호는 =" + getPhone() + "]";
 	}
 }

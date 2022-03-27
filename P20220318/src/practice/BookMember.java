@@ -7,10 +7,12 @@ package practice;
 public class BookMember extends Member { // 상속을 해주겠습니다. Member에게서.
 	private String BookName;
 	private String BookClass;
-	public BookMember(int id, String bookName, String bookClass) {
-		super();
-		this.BookName = bookName;
-		this.BookClass = bookClass;
+	
+	
+	public BookMember(int memberId, String memberName, String phone, String stuName, String stuClass) {
+		super(memberId, memberName, phone);
+		this.BookName = stuName;
+		this.BookClass = stuClass;
 	}
 	public String getBookName() {
 		return BookName;
@@ -26,7 +28,7 @@ public class BookMember extends Member { // 상속을 해주겠습니다. Member
 	}
 	@Override
 	public String toString() {
-		return "BookMember [BookName=" + BookName + ", BookClass=" + BookClass + ", getMemberId()=" + getMemberId()
-				+ ", getMemberName()=" + getMemberName() + ", getPhone()=" + getPhone() + "]";
+		return " [책의 이름은 =" + BookName + ", 강의실의 정보는 =" + BookClass + ", 회원의 아이디는 =" + getMemberId()
+				+ ", 회원의 이름은 =" + getMemberName() + ", 회원의 휴대전화 번호는 =" + getPhone() + "]";
 	}
 }

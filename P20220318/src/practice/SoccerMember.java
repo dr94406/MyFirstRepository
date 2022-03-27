@@ -24,14 +24,14 @@ public class SoccerMember extends Member {
 	}
 
 	public SoccerMember(int memberId, String memberName, String phone, String coachName, String rockerRoom) {
-		super();
+		super(memberId, memberName, phone);
 		this.SoccerName = coachName;
 		SocckerClass = rockerRoom;
 	}
 
 	@Override
 	public String toString() {
-		return "SoccerMember [coachName=" + SoccerName + ", RockerRoom=" + SocckerClass + ", getMemberId()="
-				+ getMemberId() + ", getMemberName()=" + getMemberName() + ", getPhone()=" + getPhone() + "]";
+		return " [코치의 이름은 =" + SoccerName + ", 라커룸의 이름은 =" + SocckerClass + ", 회원의 아이디는="
+				+ getMemberId() + ", 회원의 이름은 =" + getMemberName() + ", 회원의 휴대전화 번호는 =" + getPhone() + "]";
 	}
 }
