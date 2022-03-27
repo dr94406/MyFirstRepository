@@ -4,38 +4,34 @@ public class SoccerMember extends Member {
 	// 축구반의 코치이름.
 	// 락커룸의 이름.(A, B, C, D)
 	// 정보출력시 => 코치이름: 홍길동, 락커룸: A
+	private String SoccerName;
+	private String SocckerClass;
 
-	private String sccName;
-	private String sccClass;
-
-
-	public SoccerMember(int memberId, String memberName, String phone, String sccName, String sccClass) {
-		super(memberId, memberName, phone);
-		this.sccName = sccName;
-		this.sccClass = sccClass;
+	public String getCoachName() {
+		return SoccerName;
 	}
 
-	public String getSccName() {
-		return sccName;
+	public void setCoachName(String coachName) {
+		this.SoccerName = coachName;
 	}
 
-	public void setSccName(String sccName) {
-		this.sccName = sccName;
+	public String getRockerRoom() {
+		return SocckerClass;
 	}
 
-	public String getSccClass() {
-		return sccClass;
+	public void setRockerRoom(String rockerRoom) {
+		SocckerClass = rockerRoom;
 	}
 
-	public void setSccClass(String sccClass) {
-		this.sccClass = sccClass;
+	public SoccerMember(int memberId, String memberName, String phone, String coachName, String rockerRoom) {
+		super();
+		this.SoccerName = coachName;
+		SocckerClass = rockerRoom;
 	}
 
-	// 축구반 => 기본정보+ 코치이름, 락커룸이름
 	@Override
 	public String toString() {
-		return "SoccerMember [sccName=" + sccName + ", sccClass=" + sccClass + ", getMemberId()=" + getMemberId()
-				+ ", getMemberName()=" + getMemberName() + ", getPhone()=" + getPhone() + "]";
+		return "SoccerMember [coachName=" + SoccerName + ", RockerRoom=" + SocckerClass + ", getMemberId()="
+				+ getMemberId() + ", getMemberName()=" + getMemberName() + ", getPhone()=" + getPhone() + "]";
 	}
-
 }

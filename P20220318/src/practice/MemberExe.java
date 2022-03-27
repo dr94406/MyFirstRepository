@@ -4,6 +4,6 @@ package practice;
 public class MemberExe {
 	public static void main(String[] args) {
 		MemberApp app = new MemberApp();
-		app.execute();
+		app.execute(); // 메인메서드가 여기에 있는 이유
 	}
 }

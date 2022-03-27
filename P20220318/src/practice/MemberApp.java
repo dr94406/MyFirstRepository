@@ -1,126 +1,99 @@
 package practice;
 
-import java.security.Provider.Service;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.edu.SoccerMember;
+
 public class MemberApp {
 
 	List<Member> members = new ArrayList<Member>();
+
 	Scanner scn = new Scanner(System.in);
 
-	public MemberApp() {
-
-	}
-
-	// MemberService 를 구현하는 구현클래스를 선언.
-	class MemberServiceImple implements MemberService {
+	// MemberService를 구현하는 구현클래스를 선언.
+	class MemberServiceImpl implements MemberService {
 
 		@Override
 		public void addMember(Member member) {
-			members.add(member);
+			members.add(member); // 멤버를 추가하겠습니다.
 		}
 
 		@Override
 		public void modifyMember(Member member) {
-			for (int i = 0; i < members.size(); i++) {
-				if (members.get(i).getMemberId() == member.getMemberId()) {
-					members.get(i).setPhone(member.getPhone());
-				}
-			}
+
 		}
 
 		@Override
 		public List<Member> memberList() {
 			return members;
 		}
-
 	}
 
 	public void execute() {
-		MemberService sevice = new MemberServiceImple();
-		// 메뉴: 1.등록 2.수정(연락처) 3.전체리스트 9.종료
-		// 도서반 : 기본정보+도서반장,강의실이름 > list에 추가
-		// 축구반 : 기본정보+코치이름,락커룸정보
-		// 수영반 : 기본정보+강서이름,수영등급
-		while (true) {
-			int s = 0;
-			try {
-				System.out.println("1등록 2.수정 3.전체리스트 9종료");
-				s = scn.nextInt();
+		int menu = 0; // 계속 사용하는 것이니 초기화를 통해 간결하게 만들어준다.
+		int memberId = 0; // id는 숫자만 들어가야하는 정수이니 0으로 초기화
+		String memberName = ""; // 스트링은 참조형이니 ""를 넣어 초기화.
+		String phone = ""; // 스트링은 참조형이니 ""를 넣어 초기화.
 
-			} catch (InputMismatchException e) {
+		// 인터페이스 //구현객체
+		MemberService service = new MemberServiceImpl();
+		Loop1: for (; true;) {
 
-				System.out.println("숫자입력");
-				scn.next();
-			}
+			System.out.println("메뉴를 입력하세요.");
+			System.out.println("1.등록  /2.수정  /3.전체리스트  / 9.종료");
 
-			if (s == 1) {
-				System.out.println("선택> 축구반, 도서반, 수영반");
-				String s1 = scn.next();
-				if (s1.equals("축구반")) {
-					System.out.println("ID입력");
-					int s2 = scn.nextInt();
-					System.out.println("이름입력");
-					String s3 = scn.next();
-					System.out.println("전화번호");
-					String s4 = scn.next();
-					System.out.println("코치이름");
-					String s5 = scn.next();
-					System.out.println("락커룸");
-					String s6 = scn.next();
-					SoccerMember Sm = new SoccerMember(s2, s3, s4, s5, s6);
-					sevice.addMember(Sm);
+			menu = scn.nextInt();
 
-				} else if (s1.equals("도서반")) {
-					System.out.println("ID입력");
-					int s2 = scn.nextInt();
-					System.out.println("이름입력");
-					String s3 = scn.next();
-					System.out.println("전화번호");
-					String s4 = scn.next();
-					System.out.println("반장이름");
-					String s5 = scn.next();
-					System.out.println("강의실정보");
-					String s6 = scn.next();
-					BookMember Bm = new BookMember(s2, s3, s4, s5, s6);
-					sevice.addMember(Bm);
-				} else if (s1.equals("수영반")) {
-					System.out.println("ID입력");
-					int s2 = scn.nextInt();
-					System.out.println("이름입력");
-					String s3 = scn.next();
-					System.out.println("전화번호");
-					String s4 = scn.next();
-					System.out.println("강사이름");
-					String s5 = scn.next();
-					System.out.println("수영등급");
-					String s6 = scn.next();
-					SwimMember Sum = new SwimMember(s2, s3, s4, s5, s6);
-					sevice.addMember(Sum);
+			Loop2: for (; true;) {
+				if (menu == 1) {
+					System.out.println("원하는 반을 선택하세요.");
+					System.out.println("[ 1. 도서반 / 2.축구반 / 3. 수영반]");
+
+					menu = scn.nextInt();
+					System.out.println("ID를입력해주세요.");
+					memberId = scn.nextInt();
+
+					scn.nextLine();
+					
+					System.out.println("이름을 입력해주세요.");
+					memberName = scn.nextLine();
+
+					System.out.println("전화번호를 입력해주세요.");
+					phone = scn.nextLine();
+
+					if (menu == 1) {
+						System.out.println("도서반장 이름을 입력하세요.");
+						String BookName = scn.nextLine();
+
+						System.out.println("도서실 이름을 입력해주세요.");
+						String BookClass = scn.nextLine();
+						
+						BookMember bookMember = new BookMember(memberId, memberName, phone);
+						
+						service.addMember(bookMember);
+						
+						System.out.println("입력을 완료했습니다.");
+						System.out.println();
+						break Loop2;
+						
+					} else if (menu == 2) {
+						System.out.println("축구반 코치 이름을 입력하세요.");
+						String SoccerName = scn.nextLine();
+						
+						System.out.println("라커룸 이름을 입력해주세요.");
+						String SoccerClass = scn.nextLine();
+						
+						SoccerMember soccerMember = new SoccerMember(memberId, memberName, phone, SoccerName,
+								SoccerClass);
+						
+						service.addMember(soccerMember);
+					}
+
 				}
-			} else if (s == 2) {
-				System.out.print("수정할 회원번호를 입력>>");
-				int s1 = scn.nextInt();
-				System.out.print("수정할 전화번호 입력>>");
-				String s2 = scn.next();
-				Member s3 = new Member(s1, null, s2);
-				sevice.modifyMember(s3);
-
-			} else if (s == 3) {
-				List<Member> list = sevice.memberList();
-				;
-				for (Member a : list) {
-					System.out.println(a.toString());
-				}
-			} else if (s == 9) {
-				System.out.println("end");
-				break;
 			}
-
 		}
-
 	}
 }
