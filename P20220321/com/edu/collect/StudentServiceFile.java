@@ -1,99 +1,118 @@
 package com.edu.collect;
+import java.io.*;
+import java.util.*;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+// StudentServiceImpl(중첩클래스의 기능대체)
+// 입력, 수정, 삭제 => 파일에 저장이 되도록.
 public class StudentServiceFile implements StudentService {
 
-	List<Student> students;
-	File file;
+   //↓ 필드
+   List<Student> list = new ArrayList<Student>();
+   File file;
+   
+   // 기본생성자의 파일에 저장되어 있는 파일정보를 읽어서 list 컬렉션에 값을 담아준다.
+   // ↓ 생성자
+   public StudentServiceFile() {
+      try {
+      FileReader fr = new FileReader("studentList.data");
+       BufferedReader br = new BufferedReader(fr);
+       String readBuffer = null;
+       while((readBuffer = br.readLine()) !=null) {
+            String[] contents = readBuffer.split(","); // 101, 홍길동, 80, 90 콤마로 분리, 구분
+//             contents[0] <= 101, contents[1] <= 홍길동, contents[2] <= 80, contents[3] <= 90
+            list.add(new Student(Integer.parseInt(contents[0]), //
+                      contents[1],
+                      Integer.parseInt(contents[2]), //
+                      Integer.parseInt(contents[3]) //
+                      ));
+       }
+      br.close();
+      fr.close();
+       
+      } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+   }
+   }
+   
+    //↓ 메소드
+   @Override
+   public void insertStudent(Student student) {
+      list.add(student); // 추가.
+   }
 
-	public void saveToFile() {
-		try {
-			FileWriter fw = new FileWriter(file);
-			BufferedWriter bw = new BufferedWriter(fw);
+   @Override
+   public Student getStudent(int sno) {
+      for (int i = 0; i < list.size(); i++) {
+         if (list.get(i).getStudentNumber() == sno) {
+            return list.get(i);
+         }
+      }
+      return null; // 리스트를 리턴하겠습니다.
+   }
 
-			for (Student student : students) {
-				bw.write(student.getStudentNumber() + " " + student.getStudentName() + " "//
-						+ student.getEngScore() + " " + student.getKorScore() + "\n");
-			}
+   @Override
+   public List<Student> studentList() {
+      // TODO Auto-generated method stub
+      return list;
+   }
 
-			bw.close();
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+   @Override
+   public void modifyStudent(Student student) {
+      for (int i = 0; i < list.size(); i++) {
+         if (list.get(i).getStudentNumber() == student.getStudentNumber()) {
+            list.get(i).setEngScore(student.getEngScore()); // 영어점수수정.
+            list.get(i).setKorScore(student.getKorScore()); // 국어점수수정.
+         }
+      }
+   }
 
-	public StudentServiceFile() {
+   @Override
+   public void removeStudent(int sno) {
+      for (int i = 0; i < list.size(); i++) {
+         if (list.get(i).getStudentNumber() == sno) {
+            list.remove(i);
+            System.out.println("삭제했습니다.");
+            break;
+         } else {
+            System.out.println("없습니다.");
+         }
+      }
 
-		students = new ArrayList<Student>();
-		file = new File("student.dat");
-		if (!file.exists()) {
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+   }
 
-		String readBuffer = null;
-		try {
-			FileReader fr = new FileReader(file);
-			BufferedReader br = new BufferedReader(fr);
+   @Override
+   public List<Student> searchStudent(String name) {
+      List<Student> searchList = new ArrayList<Student>();
+      // 찾았다고 종료 X
+      for (int i = 0; i < list.size(); i++) {
+         // 같은 이름이 있는지 찾아보고 있으면 searchList.add()
+         if (list.get(i).getStudentName().equals(name)) { // equals 메소드는 비교하고자 하는 대상의 내용 자체를 비교
+            searchList.add(list.get(i));
+         }
+      }
+      return searchList;
+   }
 
-			while ((readBuffer = br.readLine()) != null) {
-//				System.out.println(readBuffer);
-				String[] contents = readBuffer.split(" ");
-				students.add(new Student(Integer.parseInt(contents[0]), contents[1]//
-						, Integer.parseInt(contents[2]), Integer.parseInt(contents[3])));
-			}
+   @Override
+   public void saveToFile() {
+      // TODO Auto-generated method stub
+      try {
+         FileWriter fw = new FileWriter("studentList.data");
+         BufferedWriter bw = new BufferedWriter(fw); // 보조스트림의 생성자의 매개값으로 기본스트림을 넣으면 된다.
 
-			fr.close();
-			br.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+         for (Student stud : list) {
+            bw.write(stud.getStudentNumber() + "," + stud.getStudentName()//
+                  + "," + stud.getEngScore() + "," + stud.getKorScore() + "\n");
+         }
+         bw.close();
+         fw.close();
 
-	}
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
 
-	@Override
-	public void insertStudent(Student student) {
-		students.add(student);
-	}
-
-	@Override
-	public Student getStudent(int sno) {
-		return null;
-	}
-
-	@Override
-	public List<Student> studentList() {
-		return students;
-	}
-
-	@Override
-	public void modifyStudent(Student student) {
-
-	}
-
-	@Override
-	public void removeStudent(int sno) {
-
-	}
-
-	@Override
-	public List<Student> searchStudent(String name) {
-		return null;
-	}
+   }
 
 }
