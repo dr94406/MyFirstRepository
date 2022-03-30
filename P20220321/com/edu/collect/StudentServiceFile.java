@@ -45,7 +45,7 @@ public class StudentServiceFile implements StudentService {
    @Override
    public Student getStudent(int sno) {
       for (int i = 0; i < list.size(); i++) {
-         if (list.get(i).getStudentNumber() == sno) {
+         if (list.get(i).getStudentNo() == sno) {
             return list.get(i);
          }
       }
@@ -61,7 +61,7 @@ public class StudentServiceFile implements StudentService {
    @Override
    public void modifyStudent(Student student) {
       for (int i = 0; i < list.size(); i++) {
-         if (list.get(i).getStudentNumber() == student.getStudentNumber()) {
+         if (list.get(i).getStudentNo() == student.getStudentNo()) {
             list.get(i).setEngScore(student.getEngScore()); // 영어점수수정.
             list.get(i).setKorScore(student.getKorScore()); // 국어점수수정.
          }
@@ -71,7 +71,7 @@ public class StudentServiceFile implements StudentService {
    @Override
    public void removeStudent(int sno) {
       for (int i = 0; i < list.size(); i++) {
-         if (list.get(i).getStudentNumber() == sno) {
+         if (list.get(i).getStudentNo() == sno) {
             list.remove(i);
             System.out.println("삭제했습니다.");
             break;
@@ -88,7 +88,7 @@ public class StudentServiceFile implements StudentService {
       // 찾았다고 종료 X
       for (int i = 0; i < list.size(); i++) {
          // 같은 이름이 있는지 찾아보고 있으면 searchList.add()
-         if (list.get(i).getStudentName().equals(name)) { // equals 메소드는 비교하고자 하는 대상의 내용 자체를 비교
+         if (list.get(i).getStduentName().equals(name)) { // equals 메소드는 비교하고자 하는 대상의 내용 자체를 비교
             searchList.add(list.get(i));
          }
       }
@@ -103,7 +103,7 @@ public class StudentServiceFile implements StudentService {
          BufferedWriter bw = new BufferedWriter(fw); // 보조스트림의 생성자의 매개값으로 기본스트림을 넣으면 된다.
 
          for (Student stud : list) {
-            bw.write(stud.getStudentNumber() + "," + stud.getStudentName()//
+            bw.write(stud.getStudentNo() + "," + stud.getStduentName()//
                   + "," + stud.getEngScore() + "," + stud.getKorScore() + "\n");
          }
          bw.close();

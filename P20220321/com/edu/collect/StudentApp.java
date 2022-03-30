@@ -27,7 +27,7 @@ public class StudentApp {
 		@Override
 		public Student getStudent(int sno) { // 학생번호로 한건 조회.
 			for (int i = 0; i < list.size(); i++) {
-				if (list.get(i).getStudentNumber() == sno) {
+				if (list.get(i).getStudentNo() == sno) {
 					return list.get(i);
 				}
 			}
@@ -42,7 +42,7 @@ public class StudentApp {
 		@Override
 		public void modifyStudent(Student student) { // 수정.
 			for (int i = 0; i < list.size(); i++) {
-				if (list.get(i).getStudentNumber() == student.getStudentNumber()) {
+				if (list.get(i).getStudentNo() == student.getStudentNo()) {
 					list.get(i).setEngScore(student.getEngScore()); // 영어점수수정.
 					list.get(i).setKorScore(student.getKorScore()); // 국어점수수정.
 				}
@@ -60,7 +60,7 @@ public class StudentApp {
 			// 찾았다고 종료X
 			for (int i = 0; i < list.size(); i++) {
 				// 같은 이름이 있는지 찾아보고 있으면 searchList.add()
-				if (list.get(i).getStudentName().equals(name)) {
+				if (list.get(i).getStduentName().equals(name)) {
 					searchList.add(list.get(i));
 				}
 			}
@@ -74,10 +74,13 @@ public class StudentApp {
 	} // end of StudentServiceImpl
 
 	public void execute() {
-		StudentService service = new StudentServiceFile();
+		StudentService service = null;
+//						service = new StudentServiceImpl();
+//						service = new StudentServiceFile();
+		service = new StudentServiceOracle();
 		// 메뉴: 1.추가 2.리스트 3.한건조회(학생번호) 4.수정 5.삭제 6.이름조회(이름) 9.종료
 		while (true) {
-			System.out.println("1.추가 2.리스트 3.한건조회 4.수정 9.종료");
+			System.out.println("1.입력 2.리스트 3.한건조회 4.수정 5.삭제 6.이름으로조회 9.종료.");
 			System.out.print("선택>> ");
 
 			int menu = scn.nextInt();
@@ -112,23 +115,28 @@ public class StudentApp {
 				}
 
 			} else if (menu == 4) {
+				Student s2 = new Student();
 				System.out.println("수정할 학생번호입력>>");
 				int stuNo = scn.nextInt();
+				s2.setStudentNo(stuNo);
 				System.out.println("영어입력>>");
 				int engScore = scn.nextInt();
+				s2.setEngScore(engScore);
 				System.out.println("국어입력>>");
 				int korScore = scn.nextInt();
-
-				Student s1 = new Student(stuNo, null, engScore, korScore);
-				service.modifyStudent(s1);
+				s2.setKorScore(korScore);
+//				Student s1 = new Student(stuNo, null, engScore, korScore);
+				service.modifyStudent(s2);
 				System.out.println("처리가 완료되었습니다.");
 
 			} else if (menu == 5) { // 삭제.
-
+				System.out.println("삭제할 학생번호를 입력하세요.");
+				int number = scn.nextInt();
+				service.removeStudent(number);
+				
 			} else if (menu == 6) { // 이름으로 여러건 조회.
 				System.out.println("조회할 학생이름 입력>> ");
 				String searchName = scn.next();
-
 				List<Student> list = service.searchStudent(searchName);
 				for (Student s : list) {
 					System.out.println(s.toString());

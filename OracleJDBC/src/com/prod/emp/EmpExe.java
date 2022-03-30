@@ -30,6 +30,10 @@ public class EmpExe {
 				employee.setEmployeeId(id);
 
 				System.out.println("성을 입력하세요.");
+				String firstName = scn.next();   
+				employee.setFirstName(firstName);  
+
+				System.out.println("이름을 입력하세요.");
 				String lastName = scn.next();
 				employee.setLastName(lastName);
 
@@ -44,10 +48,11 @@ public class EmpExe {
 				System.out.println("부서를 입력하세요. (ex: IT_PROG) ");
 				String jobid = scn.next();
 				employee.setJobId(jobid);
+//				dao.insertEmp(employee);
 
-				dao.insertEmp(employee);
+				 dao.insertEmp(employee);
 
-			} else if (menu == 3) { // 수정.
+			} else if (menu == 3) { // 수정처.
 				Employee employee = new Employee();
 				System.out.println("수정할 이름을 입력하세요.");
 				String firstname = scn.next();
@@ -77,13 +82,13 @@ public class EmpExe {
 			} else if (menu == 5) { // 한건조회.
 				System.out.println("조회할 사원번호를 입력하세요.");
 				int eid = scn.nextInt();
-				
+
 				Employee emp = dao.searchEmp(eid);
 				if (emp == null)
 					System.out.println("조회결과 없습니다.");
-				else 
+				else
 					System.out.println(emp.toString());
-				
+
 			} else if (menu == 9) { // 종료.
 				System.out.println("프로그램을 종료.");
 				break;
