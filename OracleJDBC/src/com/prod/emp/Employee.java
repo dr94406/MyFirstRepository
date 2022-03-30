@@ -3,12 +3,21 @@ package com.prod.emp;
 public class Employee {
 	// employees의 테이블의 칼럼에 해당되는 필드설정.
 	private int employeeId; // employees.employee_id
-	private String firstName; //employees.first_name
+	private String firstName; // employees.first_name
 	private String lastName; // employees.last_name;
-	private String email; //  employees.email;
+	private String email; // employees.email;
 	private int salary; // employees.salary;
 	private String hireDate; // employees.hireDate;
 	private String jobId; // employees.jobId;
+	private String phoneNumber;
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 
 	public int getEmployeeId() {
 		return employeeId;
