@@ -22,8 +22,8 @@ public class JDBCSample {
 	public static Connection getConnect() {
 		try { // 밑의 주소에서 Oracle 주소와 아이디, 비밀번호로 접속을 하겠습니다. (데이터베이스)
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
-		} catch (ClassNotFoundException | SQLException e) {
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr"); // oracle 연결주소 및 아이디 비밀번호.
+		} catch (ClassNotFoundException | SQLException e) { // 예외처리 (try,catch)
 			e.printStackTrace();
 		}
 		System.out.println("연결성공!!");
