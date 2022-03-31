@@ -1,8 +1,8 @@
-package com.edu.collect;
+package Book;
 
-public class StudentExe { 
+public class BookExe { 
 	public static void main(String[] args) {
-		StudentApp app = new StudentApp(); // 인스턴스 생성
+		BookApp app = new BookApp(); // 인스턴스 생성
 		app.execute();
 	}
 }
