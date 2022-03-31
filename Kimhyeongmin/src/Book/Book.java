@@ -1,5 +1,5 @@
 package Book;
-
+// 오전에 한 것은 책의 정보를 기존의 소스파일 그대로 받아와서 제목만 변동한 것이다.
 import java.io.Serializable;
 
 public class Book implements Serializable {
