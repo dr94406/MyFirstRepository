@@ -2,7 +2,7 @@ package com.edu.collect;
 
 import java.util.List;
 
-
+public interface StudentService { // 인터페이스 (메뉴정보창)
 	
 	public void insertStudent(Student student); // 입력.
 	public Student getStudent(int sno); // 한건조회.

@@ -63,7 +63,7 @@ public class StudentServiceOracle extends DAO implements StudentService {
 
 		conn = getConnect();
 		try {
-			psmt = conn.prepareStatement("select * from student_info order by student_name");
+			psmt = conn.prepareStatement("select * from student_info");
 			rs = psmt.executeQuery(); // 실행건수만큼 반복자.
 			while (rs.next()) { // 반복자를 통해 요소를 가지고 올 수 있는지 체크. 있으면 하나 가지고 옴.
 				Student student = new Student();
@@ -82,11 +82,12 @@ public class StudentServiceOracle extends DAO implements StudentService {
 
 		return list;
 	}
-
+	
+	// 수정처리
 	@Override
-	public void modifyStudent(Student stu) { // 수정처리
+	public void modifyStudent(Student stu) { 
 		conn = getConnect();
-		String sql = "update student_info " + "set eng_score = ?, " + "kor_score = ? " + "where student_no = ?";
+		String sql = "update student_info " + "set eng_score = ?, " + "kor_score = ?, " + "where student_no = ?";
 		try {
 			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서 employeeId 필드값.
 			psmt.setInt(1, stu.getEngScore());
