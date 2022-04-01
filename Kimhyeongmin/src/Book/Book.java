@@ -12,13 +12,6 @@ public class Book implements Serializable {
 	private int price; // 가격
 	private String rental; // 대여 ( y,n으로 구분)
 
-	public String getRental() {
-		return rental;
-	}
-
-	public void setRental(String rental) {
-		rental = rental;
-	}
 
 	// 생성자 : 기본생성자, 매개값이 4개 생성자.
 	public Book() {
@@ -64,6 +57,13 @@ public class Book implements Serializable {
 	public void setPrice(int price) {
 		price = price;
 	}
+	public String getRental() {
+		return rental;
+	}
+	
+	public void setRental(String rental) {
+		rental = rental;
+	}
 
 	public Book(int bookId, String title, String writer, String publisher, int price, String rental) {
 		super();
@@ -80,7 +80,7 @@ public class Book implements Serializable {
 		System.out.println();
 		return "Book [도서번호:" + bookId + ", 도서명:" + title + ", 작가명:" + writer +
 										  ", 출판사:" + publisher + ", 도서가격:" + price
-										+ ", 대여정보:" + "Rental]";
+										+ ", 대여정보:" + rental + "]";
 	}
 
 }
