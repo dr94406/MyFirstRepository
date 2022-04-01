@@ -66,6 +66,7 @@ public class BookApp {
 			// TODO Auto-generated method stub
 			return list;
 		}
+
 	} // end of StudentServiceImpl
 
 	public void execute() {
@@ -75,28 +76,36 @@ public class BookApp {
 		service = new BookServiceOracle();
 		// 메뉴: 1.추가 2.리스트 3.한건조회(학생번호) 4.수정 5.삭제 6.이름조회(이름) 7.장르로조회 9.종료
 		while (true) {
-			System.out.println("1.책정보 입력 2.전체리스트 3.한건조회  4.수정 5.삭제 6.번호로조회  9.종료.");
-			System.out.print("선택>> ");
+			System.out.println();
+			System.out.println("=========================이곳은 예담사이버도서관입니다, 원하는 메뉴를 선택하세요.=========================");
+			System.out.println();
+			System.out.println(
+					"1.도서 등록 2.도서 전체조회 3.도서 번호로 조회  4.도서 이름으로 조회 5.도서정보 삭제 6.도서정보 수정 7. 도서대여기능 8. 도서반납기능 9.종료");
+			System.out.println(
+					"=============================================================================================");
 
 			int menu = scn.nextInt();
 			if (menu == 1) {
 				// 책정보 추가입력. : 책번호, 책이름, 책저자,책제작사,책금액 입력
-				System.out.println("책번호입력>>");
+				System.out.println("도서번호를 입력하세요.");
 				int bookId = scn.nextInt();
-				
-				System.out.println("책이름입력>>");
+
+				System.out.println("도서이름을 입력하세요.");
 				String title = scn.next();
-				
-				System.out.println("책저자입력>>");
+
+				System.out.println("작가명을 입력하세요.");
 				String writer = scn.next();
-				
-				System.out.println("책제작사입력 >>");
+
+				System.out.println("출판사를 입력하세요.");
 				String publisher = scn.next();
-				
-				System.out.println("책금액입력>>");
+
+				System.out.println("도서가격을 입력하세요.");
 				int price = scn.nextInt();
-				
-				Book s1 = new Book(bookId, title, writer,publisher,price);
+
+				System.out.println("대출여부를 입력하세요.");
+				String rental = scn.next();
+
+				Book s1 = new Book(bookId, title, writer, publisher, price, rental);
 				service.insertBook(s1);
 
 			} else if (menu == 2) {
@@ -105,48 +114,60 @@ public class BookApp {
 					System.out.println(s.toString());
 				}
 
-			} else if (menu == 3) { // 한건 조회.
-				System.out.println("조회할 책번호 입력>>");
-				int bookNo = scn.nextInt();
-				Book book = service.getBook(bookNo);
+			} else if (menu == 3) { // 도서번호로 한건 조회.
+				System.out.println("조회할 도서번호를 입력하세요.");
+				int bookId = scn.nextInt();
+				Book book = service.getBook(bookId);
+				System.out.println();
+				System.out.println("번호를 통해 조회가 완료되었습니다. 아래의 정보를 확인하세요.");
 				if (book == null) {
-					System.out.println("조회된 결과가 없습니다.");
+					System.out.println("조회된 결과가 없습니다, 다시입력해주세요.");
 				} else {
 					System.out.println(book.toString());
 				}
 
-			} else if (menu == 4) {
-				Book s2 = new Book();
-				System.out.println("수정할 책번호입력>>");
-				int bookId = scn.nextInt();
-				s2.setBookId(bookId);
-				System.out.println("책이름 입력>>");
-				String title = scn.next();
-				s2.setTitle(title);
-				System.out.println("책저자입력>>");
-				String writer = scn.next();
-				s2.setWriter(writer);
-				System.out.println("책가격입력");
-				int price = scn.nextInt();
-				s2.setPrice(price);
-				service.modifyBook(s2);
-				System.out.println("처리가 완료되었습니다.");
-
-			} else if (menu == 5) { // 삭제.
-				System.out.println("삭제할 책번호를 입력>>");
-				int number = scn.nextInt();
-				service.removeBook(number);
-
-			} else if (menu == 6) { // 번호로 여러건 조회.
-				System.out.println("조회할 책번호 입력>>");
-				String searchId = scn.next();
-				List<Book> list = service.searchBook(searchId);
+			} else if (menu == 4) { // 이름으로 조회
+				System.out.println("조회할 도서이름을 입력하세요.");
+				String searchTitle = scn.next();
+				List<Book> list = service.searchBook(searchTitle);
+				System.out.println();
+				System.out.println("이름을 통해 조회가 완료되었습니다. 아래의 정보를 확인하세요.");
 				for (Book s : list) {
 					System.out.println(s.toString());
 				}
 
+			} else if (menu == 5) { // 삭제.
+				System.out.println("삭제할 도서번호를 입력하세요.");
+				int number = scn.nextInt();
+				service.removeBook(number);
+
+			} else if (menu == 6) {
+				Book s2 = new Book();
+				System.out.println("수정할 도서번호를 입력하세요.>>");
+				int bookId = scn.nextInt();
+				s2.setBookId(bookId);
+				System.out.println("도서명을 입력하세요.>>");
+				String title = scn.next();
+				s2.setTitle(title);
+				System.out.println("작가명을 입력하세요.>>");
+				String writer = scn.next();
+				s2.setWriter(writer);
+
+				System.out.println("출판사를 입력하세요.>>");
+				String publisher = scn.next();
+				s2.setPublisher(publisher);
+
+				System.out.println("도서가격을 입력하세요. ");
+				int price = scn.nextInt();
+				s2.setPrice(price);
+
+				service.modifyBook(s2);
+				System.out.println("도서정보 수정이 완료되었습니다.");
+
+			} else if (menu == 7) {
+
 			} else if (menu == 9) {
-				System.out.println("프로그램을 종료합니다.");
+				System.out.println("프로그램을 종료하겠습니다.");
 				service.saveToFile();
 				break;
 			}
