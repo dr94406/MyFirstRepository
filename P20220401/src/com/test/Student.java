@@ -1,20 +1,24 @@
 package com.test;
 
 public class Student {
-	private String studNo; // 학생번호.
+	private int studNo; // 학생번호.
 	private String studName; // 학생이름.
-
-	public Student(String studNo, String studName) {
-		super();
+	private String phone; // 휴대폰 
+	
+	
+	
+	
+	public Student(int studNo, String studName, String phone) {
 		this.studNo = studNo;
 		this.studName = studName;
+		this.phone = phone;
 	}
 
-	public String getStudNo() {
+	public int getStudNo() {
 		return studNo;
 	}
 
-	public void setStudNo(String studNo) {
+	public void setStudNo(int studNo) {
 		this.studNo = studNo;
 	}
 
@@ -26,9 +30,17 @@ public class Student {
 		this.studName = studName;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString() {
-		return "Student [studNo=" + studNo + ", studName=" + studName + "]";
+		return "Student [studNo=" + studNo + ", studName=" + studName + ", phone=" + phone + "]";
 	}
 
 }
