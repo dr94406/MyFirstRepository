@@ -31,7 +31,7 @@ public class BookApp {
 			for (int i = 0; i < list.size(); i++) {
 				if (list.get(i).getBookId() == book.getBookId()) {
 					list.get(i).setTitle(book.getTitle());
-					list.get(i).setWriter(book.getWriter());
+					list.get(i).setAuthor(book.getAuthor());
 					list.get(i).setPublisher(book.getPublisher());
 					list.get(i).setPrice(book.getPrice());
 					list.get(i).setRental(book.getRental());
@@ -95,7 +95,7 @@ public class BookApp {
 				String title = scn.next();
 
 				System.out.println("작가명을 입력하세요.");
-				String writer = scn.next();
+				String author = scn.next();
 
 				System.out.println("출판사를 입력하세요.");
 				String publisher = scn.next();
@@ -106,7 +106,7 @@ public class BookApp {
 				System.out.println("대출여부를 입력하세요.");
 				String rental = scn.next();
 
-				Book s1 = new Book(bookId, title, writer, publisher, price, rental);
+				Book s1 = new Book(bookId, title, author, publisher, price, rental);
 				service.insertBook(s1);
 
 				
@@ -152,8 +152,8 @@ public class BookApp {
 				String title = scn.next();
 				s2.setTitle(title);
 				System.out.println("작가명을 입력하세요.>>");
-				String writer = scn.next();
-				s2.setWriter(writer);
+				String author = scn.next();
+				s2.setAuthor(author);
 
 				System.out.println("출판사를 입력하세요.>>");
 				String publisher = scn.next();

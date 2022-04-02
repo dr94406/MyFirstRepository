@@ -7,7 +7,7 @@ public class Book implements Serializable {
 	// 책번호(1,2,3), 책이름(홍길동), 장르 (소설).
 	private int bookId; // 책 번호
 	private String title; // 도서명
-	private String writer; // 작가명
+	private String author; // 작가명
 	private String publisher; // 출판사
 	private int price; // 가격
 	private String rental; // 대여 ( y,n으로 구분)
@@ -34,12 +34,14 @@ public class Book implements Serializable {
 		this.title = title;
 	}
 
-	public String getWriter() {
-		return writer;
+
+
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	public String getPublisher() {
@@ -65,11 +67,11 @@ public class Book implements Serializable {
 		this.rental = rental;
 	}
 
-	public Book(int bookId, String title, String writer, String publisher, int price, String rental) {
+	public Book(int bookId, String title, String author, String publisher, int price, String rental) {
 		super();
 		this.bookId = bookId;
 		this.title = title;
-		this.writer = writer;
+		this.author = author;
 		this.publisher = publisher;
 		this.price = price;
 		this.rental = rental;
@@ -78,7 +80,7 @@ public class Book implements Serializable {
 	@Override
 	public String toString() {
 		System.out.println();
-		return "Book [도서번호:" + bookId + ", 도서명:" + title + ", 작가명:" + writer +
+		return "Book [도서번호:" + bookId + ", 도서명:" + title + ", 작가명:" + author +
 										  ", 출판사:" + publisher + ", 도서가격:" + price
 										+ ", 대여정보:" + rental + "]";
 	}

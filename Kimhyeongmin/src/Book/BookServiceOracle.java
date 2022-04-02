@@ -10,13 +10,13 @@ public class BookServiceOracle extends DAO implements BookService {
 	@Override
 	public void insertBook(Book book) {
 		conn = getConnect();
-		String sql = "insert into book_info  (book_id, title, writer, publisher, price, rental)\r\n"
+		String sql = "insert into book_info  (book_id, title, author, publisher, price, rental)\r\n"
 				+ "values(?, ?, ?, ?, ?, ?)";
 		try {
 			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서 getBookId 필드값.
 			psmt.setInt(1, book.getBookId());
 			psmt.setString(2, book.getTitle());
-			psmt.setString(3, book.getWriter());
+			psmt.setString(3, book.getAuthor());
 			psmt.setString(4, book.getPublisher());
 			psmt.setInt(5, book.getPrice());
 			psmt.setString(6, book.getRental());
@@ -47,7 +47,7 @@ public class BookServiceOracle extends DAO implements BookService {
 				book = new Book();
 				book.setBookId(rs.getInt("book_id")); // 값을 읽어와서 지정하겠습니다.
 				book.setTitle(rs.getString("title"));
-				book.setWriter(rs.getString("writer"));
+				book.setAuthor(rs.getString("author"));
 				book.setPublisher(rs.getString("publisher"));
 				book.setPrice(rs.getInt("price"));
 				book.setRental(rs.getString("rental"));
@@ -77,7 +77,7 @@ public class BookServiceOracle extends DAO implements BookService {
 
 				book.setBookId(rs.getInt("book_Id")); // 값을 읽어와서 지정하겠습니다.
 				book.setTitle(rs.getString("title"));
-				book.setWriter(rs.getString("writer"));
+				book.setAuthor(rs.getString("author"));
 				book.setPublisher(rs.getString("publisher"));
 				book.setPrice(rs.getInt("price"));
 				book.setRental(rs.getString("rental"));
@@ -95,15 +95,18 @@ public class BookServiceOracle extends DAO implements BookService {
 	@Override // 수정처리
 	public void modifyBook(Book book) {
 		conn = getConnect();
-		String sql = "update book_info " + "set title = ?, " + "writer = ?, " + "publisher = ?, " + "price = ?, "
-				+ "rental = ?, " + "where book_id = ?";
+		String sql = "update book_info " + "set title = ?, " 
+				   + "author = ?, "  + "publisher = ?, " 
+				   + "price = ?,  "  + "rental = ? "
+				   + "where book_id = ?";
 		try {
-			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서 employeeId 필드값.
+			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서  필드값.
 			psmt.setString(1, book.getTitle());
-			psmt.setString(2, book.getWriter());
+			psmt.setString(2, book.getAuthor());
 			psmt.setString(3, book.getPublisher());
 			psmt.setInt(4, book.getPrice());
-			psmt.setInt(5, book.getBookId());
+			psmt.setString(5, book.getRental());
+			psmt.setInt(6, book.getBookId());
 
 			int r = psmt.executeUpdate(); // 실행된 건수를 반환해줍니다.
 			System.out.println(r + "건 수정되었습니다.");
@@ -146,7 +149,7 @@ public class BookServiceOracle extends DAO implements BookService {
 				gra = new Book();
 				gra.setBookId(rs.getInt("book_id")); // 값을 읽어와서 지정하겠습니다.
 				gra.setTitle(rs.getString("title"));
-				gra.setWriter(rs.getString("writer"));
+				gra.setAuthor(rs.getString("author"));
 				gra.setPublisher(rs.getString("publisher"));
 				gra.setPrice(rs.getInt("price"));
 
