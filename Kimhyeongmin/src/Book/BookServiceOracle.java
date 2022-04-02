@@ -10,10 +10,10 @@ public class BookServiceOracle extends DAO implements BookService {
 	@Override
 	public void insertBook(Book book) {
 		conn = getConnect();
-		String sql = "insert into book_info  (book_id, title, writer, publisher, price, rentalYN"
+		String sql = "insert into book_info  (book_id, title, writer, publisher, price, rental)\r\n"
 				+ "values(?, ?, ?, ?, ?, ?)";
 		try {
-			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서 employeeId 필드값.
+			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서 getBookId 필드값.
 			psmt.setInt(1, book.getBookId());
 			psmt.setString(2, book.getTitle());
 			psmt.setString(3, book.getWriter());
@@ -50,6 +50,7 @@ public class BookServiceOracle extends DAO implements BookService {
 				book.setWriter(rs.getString("writer"));
 				book.setPublisher(rs.getString("publisher"));
 				book.setPrice(rs.getInt("price"));
+				book.setRental(rs.getString("rental"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,12 +71,16 @@ public class BookServiceOracle extends DAO implements BookService {
 			rs = psmt.executeQuery(); // 실행건수만큼 반복자.
 			while (rs.next()) { // 반복자를 통해 요소를 가지고 올 수 있는지 체크. 있으면 하나 가지고 옴.
 				Book book = new Book();
+
+				// 출력되는지 확인
+//				System.out.println(rs.getString("title"));
+
 				book.setBookId(rs.getInt("book_Id")); // 값을 읽어와서 지정하겠습니다.
 				book.setTitle(rs.getString("title"));
 				book.setWriter(rs.getString("writer"));
 				book.setPublisher(rs.getString("publisher"));
 				book.setPrice(rs.getInt("price"));
-				book.setRental(rs.getString("rentalYN"));
+				book.setRental(rs.getString("rental"));
 				list.add(book);
 			}
 		} catch (SQLException e) {
@@ -90,8 +95,8 @@ public class BookServiceOracle extends DAO implements BookService {
 	@Override // 수정처리
 	public void modifyBook(Book book) {
 		conn = getConnect();
-		String sql = "update book_info " + "set title = ?, " + "writer = ?, " + "publisher = ?, " + "price = ? "
-				+ "where book_id = ?";
+		String sql = "update book_info " + "set title = ?, " + "writer = ?, " + "publisher = ?, " + "price = ?, "
+				+ "rental = ?, " + "where book_id = ?";
 		try {
 			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서 employeeId 필드값.
 			psmt.setString(1, book.getTitle());

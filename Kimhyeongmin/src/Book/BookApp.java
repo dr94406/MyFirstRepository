@@ -34,6 +34,7 @@ public class BookApp {
 					list.get(i).setWriter(book.getWriter());
 					list.get(i).setPublisher(book.getPublisher());
 					list.get(i).setPrice(book.getPrice());
+					list.get(i).setRental(book.getRental());
 				}
 			}
 		}
@@ -80,7 +81,7 @@ public class BookApp {
 			System.out.println("=========================이곳은 예담사이버도서관입니다, 원하는 메뉴를 선택하세요.=========================");
 			System.out.println();
 			System.out.println(
-					"1.도서 등록 2.도서 전체조회 3.도서 번호로 조회  4.도서 이름으로 조회 5.도서정보 삭제 6.도서정보 수정 7. 도서대여기능 8. 도서반납기능 9.종료");
+					"1.도서 등록 2.도서 전체조회 3.도서 번호로 조회  4.도서 이름으로 조회 5.도서정보 삭제 6.도서정보 수정  9.종료");
 			System.out.println(
 					"=============================================================================================");
 
@@ -108,6 +109,7 @@ public class BookApp {
 				Book s1 = new Book(bookId, title, writer, publisher, price, rental);
 				service.insertBook(s1);
 
+				
 			} else if (menu == 2) {
 				List<Book> list = service.bookList();
 				for (Book s : list) {
@@ -161,10 +163,13 @@ public class BookApp {
 				int price = scn.nextInt();
 				s2.setPrice(price);
 
+				System.out.println("대출여부를 입력하세요.");
+				String rental = scn.next();
+				s2.setRental(rental);
+				
 				service.modifyBook(s2);
 				System.out.println("도서정보 수정이 완료되었습니다.");
 
-			} else if (menu == 7) {
 
 			} else if (menu == 9) {
 				System.out.println("프로그램을 종료하겠습니다.");

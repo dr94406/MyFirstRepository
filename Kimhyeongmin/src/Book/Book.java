@@ -1,6 +1,6 @@
 package Book;
 
-// 오전에 한 것은 책의 정보를 기존의 소스파일 그대로 받아와서 제목만 변동한 것이다.
+
 import java.io.Serializable;
 
 public class Book implements Serializable {
@@ -23,7 +23,7 @@ public class Book implements Serializable {
 	}
 
 	public void setBookId(int bookId) {
-		bookId = bookId;
+		this.bookId = bookId;
 	}
 
 	public String getTitle() {
@@ -31,7 +31,7 @@ public class Book implements Serializable {
 	}
 
 	public void setTitle(String title) {
-		title = title;
+		this.title = title;
 	}
 
 	public String getWriter() {
@@ -39,7 +39,7 @@ public class Book implements Serializable {
 	}
 
 	public void setWriter(String writer) {
-		writer = writer;
+		this.writer = writer;
 	}
 
 	public String getPublisher() {
@@ -47,7 +47,7 @@ public class Book implements Serializable {
 	}
 
 	public void setPublisher(String publisher) {
-		publisher = publisher;
+		this.publisher = publisher;
 	}
 
 	public int getPrice() {
@@ -55,24 +55,24 @@ public class Book implements Serializable {
 	}
 
 	public void setPrice(int price) {
-		price = price;
+		this.price = price;
 	}
 	public String getRental() {
 		return rental;
 	}
 	
 	public void setRental(String rental) {
-		rental = rental;
+		this.rental = rental;
 	}
 
 	public Book(int bookId, String title, String writer, String publisher, int price, String rental) {
 		super();
-		bookId = bookId;
-		title = title;
-		writer = writer;
-		publisher = publisher;
-		price = price;
-		rental = rental;
+		this.bookId = bookId;
+		this.title = title;
+		this.writer = writer;
+		this.publisher = publisher;
+		this.price = price;
+		this.rental = rental;
 	}
 
 	@Override
