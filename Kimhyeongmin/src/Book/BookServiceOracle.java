@@ -65,9 +65,9 @@ public class BookServiceOracle extends DAO implements BookService {
 	public List<Book> bookList() {
 		List<Book> list = new ArrayList<Book>(); // 조회된 결과값을 담기위한 컬렉션.
 
-		conn = getConnect();
+		conn = getConnect();               //select * from book_info order by book_id;
 		try {
-			psmt = conn.prepareStatement("select * from book_info");
+			psmt = conn.prepareStatement("select * from book_info order by book_id");
 			rs = psmt.executeQuery(); // 실행건수만큼 반복자.
 			while (rs.next()) { // 반복자를 통해 요소를 가지고 올 수 있는지 체크. 있으면 하나 가지고 옴.
 				Book book = new Book();
@@ -149,10 +149,10 @@ public class BookServiceOracle extends DAO implements BookService {
 				gra = new Book();
 				gra.setBookId(rs.getInt("book_id")); // 값을 읽어와서 지정하겠습니다.
 				gra.setTitle(rs.getString("title"));
-				gra.setAuthor(rs.getString("author"));
+				gra.setAuthor(rs.getString("a"));
 				gra.setPublisher(rs.getString("publisher"));
 				gra.setPrice(rs.getInt("price"));
-
+				gra.setRental(rs.getString("rental"));
 				Books.add(gra);
 			}
 		} catch (SQLException e) {
@@ -166,6 +166,12 @@ public class BookServiceOracle extends DAO implements BookService {
 	@Override
 	public void saveToFile() { // 안해도됨.
 
+	}
+
+	@Override
+	public void rentalBook(Book book) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

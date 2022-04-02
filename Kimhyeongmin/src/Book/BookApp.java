@@ -40,7 +40,7 @@ public class BookApp {
 		}
 
 		@Override
-		public void removeBook(int boo) {
+		public void removeBook(int glo) {
 
 		}
 
@@ -66,6 +66,12 @@ public class BookApp {
 		public List<Book> bookList() {
 			// TODO Auto-generated method stub
 			return list;
+		}
+
+		@Override
+		public void rentalBook(Book book) {
+			// TODO Auto-generated method stub
+			
 		}
 
 	} // end of StudentServiceImpl
@@ -121,7 +127,6 @@ public class BookApp {
 				int bookId = scn.nextInt();
 				Book book = service.getBook(bookId);
 				System.out.println();
-				System.out.println("번호를 통해 조회가 완료되었습니다. 아래의 정보를 확인하세요.");
 				if (book == null) {
 					System.out.println("조회된 결과가 없습니다, 다시입력해주세요.");
 				} else {
@@ -133,7 +138,6 @@ public class BookApp {
 				String searchTitle = scn.next();
 				List<Book> list = service.searchBook(searchTitle);
 				System.out.println();
-				System.out.println("이름을 통해 조회가 완료되었습니다. 아래의 정보를 확인하세요.");
 				for (Book s : list) {
 					System.out.println(s.toString());
 				}
