@@ -109,11 +109,8 @@ public class BookApp {
 
 				System.out.println("도서가격을 입력하세요.");
 				int price = scn.nextInt();
-
-				System.out.println("대여여부를 입력하세요.");
-				String rental = scn.next();
-
-				Book s1 = new Book(bookId, title, author, publisher, price, rental);
+			
+				Book s1 = new Book(bookId, title, author, publisher, price);
 				service.insertBook(s1);
 
 			} else if (menu == 2) {
