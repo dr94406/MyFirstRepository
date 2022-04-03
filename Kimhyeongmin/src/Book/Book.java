@@ -10,8 +10,8 @@ public class Book implements Serializable {
 	private String author; // 작가명
 	private String publisher; // 출판사
 	private int price; // 가격
-	private String rental; // 대여 ( y,n으로 구분)
-
+	private String rental; // 대여 ( Y,N으로 구분)
+	
 
 	// 생성자 : 기본생성자, 매개값이 4개 생성자.
 	public Book() {
@@ -66,8 +66,9 @@ public class Book implements Serializable {
 	public void setRental(String rental) {
 		this.rental = rental;
 	}
-
-	public Book(int bookId, String title, String author, String publisher, int price, String rental) {
+	
+	
+	public Book(int bookId, String title, String author, String publisher, int price, String rental ) {
 		super();
 		this.bookId = bookId;
 		this.title = title;
@@ -75,6 +76,7 @@ public class Book implements Serializable {
 		this.publisher = publisher;
 		this.price = price;
 		this.rental = rental;
+		
 	}
 
 	@Override

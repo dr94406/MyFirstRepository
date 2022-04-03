@@ -70,10 +70,12 @@ public class BookApp {
 
 		@Override
 		public void rentalBook(Book book) {
-			// TODO Auto-generated method stub
-			
+			for (int i = 0; i < list.size(); i++) {
+				if (list.get(i).getBookId() == book.getBookId()) {
+					list.get(i).setRental(book.getRental());
+				}
+			}
 		}
-
 	} // end of StudentServiceImpl
 
 	public void execute() {
@@ -86,8 +88,7 @@ public class BookApp {
 			System.out.println();
 			System.out.println("=========================이곳은 예담사이버도서관입니다, 원하는 메뉴를 선택하세요.=========================");
 			System.out.println();
-			System.out.println(
-					"1.도서 등록 2.도서 전체조회 3.도서 번호로 조회  4.도서 이름으로 조회 5.도서정보 삭제 6.도서정보 수정  9.종료");
+			System.out.println("1.도서 등록 2.도서 전체조회 3.도서 번호로 조회  4.도서 이름으로 조회 5.도서정보 삭제 6.도서정보 수정 7.도서대여 8.도서반납  9.종료");
 			System.out.println(
 					"=============================================================================================");
 
@@ -109,13 +110,12 @@ public class BookApp {
 				System.out.println("도서가격을 입력하세요.");
 				int price = scn.nextInt();
 
-				System.out.println("대출여부를 입력하세요.");
+				System.out.println("대여여부를 입력하세요.");
 				String rental = scn.next();
 
 				Book s1 = new Book(bookId, title, author, publisher, price, rental);
 				service.insertBook(s1);
 
-				
 			} else if (menu == 2) {
 				List<Book> list = service.bookList();
 				for (Book s : list) {
@@ -170,10 +170,60 @@ public class BookApp {
 				System.out.println("대출여부를 입력하세요.");
 				String rental = scn.next();
 				s2.setRental(rental);
-				
+
 				service.modifyBook(s2);
 				System.out.println("도서정보 수정이 완료되었습니다.");
 
+			} else if (menu == 7) {
+				Book s2 = new Book();
+				System.out.println("대여할 도서번호를 입력하세요.>>");
+				int bookId = scn.nextInt();
+				s2.setBookId(bookId);
+
+				System.out.println("입력한 도서를 대여하시겠습니까?. 네/아니오");
+				scn.nextLine();
+				String tmp = scn.nextLine();
+				if ("네".equals(tmp)) {
+					s2.setRental("Y");
+					service.rentalBook(s2);
+					System.out.println("도서 대여가 완료되었습니다.");
+
+				} else if ("아니오".equals(tmp)) {
+					s2.setRental("N");
+					System.out.println("도서대여가 취소되었습니다.");
+
+				} else {
+					System.out.println("입력한 값이 유효하지 않습니다.");
+				}
+
+			} else if (menu == 8) {
+				Book s2 = new Book();
+				System.out.println("반납할 도서번호를 입력하세요.>>");
+				int bookId = scn.nextInt();
+				s2.setBookId(bookId);
+
+				System.out.println("입력한 도서를 반납하시겠습니까?. 네/아니오");
+				scn.nextLine();
+				String tmp = scn.nextLine();
+				if ("네".equals(tmp)) {
+					// 네 일경우 수행될 블럭
+					s2.setRental("N");
+					service.rentalBook(s2);
+					System.out.println("도서 반납이 완료되었습니다.");
+
+				} else if ("아니오".equals(tmp)) {
+					s2.setRental("Y");
+					System.out.println("도서 반납이 취소되었습니다.");
+
+				} else {
+					System.out.println("입력한 값이 유효하지 않습니다.");
+				}
+
+//				String rental = scn.next();
+//				s2.setRental(rental);		
+//				service.rentalBook(s2);
+//				System.out.println("도서 반납이 완료되었습니다.");
+//				
 
 			} else if (menu == 9) {
 				System.out.println("프로그램을 종료하겠습니다.");

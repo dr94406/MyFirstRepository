@@ -65,9 +65,9 @@ public class BookServiceOracle extends DAO implements BookService {
 	public List<Book> bookList() {
 		List<Book> list = new ArrayList<Book>(); // 조회된 결과값을 담기위한 컬렉션.
 
-		conn = getConnect();               //select * from book_info order by book_id;
+		conn = getConnect(); // select * from book_info order by book_id;
 		try {
-			psmt = conn.prepareStatement("select * from book_info order by book_id");
+			psmt = conn.prepareStatement("select * from book_info where rental not in ('Y') order by book_id ");
 			rs = psmt.executeQuery(); // 실행건수만큼 반복자.
 			while (rs.next()) { // 반복자를 통해 요소를 가지고 올 수 있는지 체크. 있으면 하나 가지고 옴.
 				Book book = new Book();
@@ -95,12 +95,10 @@ public class BookServiceOracle extends DAO implements BookService {
 	@Override // 수정처리
 	public void modifyBook(Book book) {
 		conn = getConnect();
-		String sql = "update book_info " + "set title = ?, " 
-				   + "author = ?, "  + "publisher = ?, " 
-				   + "price = ?,  "  + "rental = ? "
-				   + "where book_id = ?";
+		String sql = "update book_info " + "set title = ?, " + "author = ?, " + "publisher = ?, " + "price = ?,  "
+				+ "rental = ? " + "where book_id = ?";
 		try {
-			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서  필드값.
+			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서 필드값.
 			psmt.setString(1, book.getTitle());
 			psmt.setString(2, book.getAuthor());
 			psmt.setString(3, book.getPublisher());
@@ -149,7 +147,7 @@ public class BookServiceOracle extends DAO implements BookService {
 				gra = new Book();
 				gra.setBookId(rs.getInt("book_id")); // 값을 읽어와서 지정하겠습니다.
 				gra.setTitle(rs.getString("title"));
-				gra.setAuthor(rs.getString("a"));
+				gra.setAuthor(rs.getString("author"));
 				gra.setPublisher(rs.getString("publisher"));
 				gra.setPrice(rs.getInt("price"));
 				gra.setRental(rs.getString("rental"));
@@ -168,10 +166,22 @@ public class BookServiceOracle extends DAO implements BookService {
 
 	}
 
-	@Override
+	@Override // 대여기능 
 	public void rentalBook(Book book) {
-		// TODO Auto-generated method stub
-		
+		conn = getConnect();
+		String sql = "update book_info " + "set rental = ? " + "where book_id = ?";
+		try {
+			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서 필드값.
+			psmt.setString(1, book.getRental());
+			psmt.setInt(2, book.getBookId());
+
+			int r = psmt.executeUpdate(); // 실행된 건수를 반환해줍니다.
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// 정상실행, 예외발생 => 반드시 실행코드.
+			disconnect();
+		}
 	}
 
 }
