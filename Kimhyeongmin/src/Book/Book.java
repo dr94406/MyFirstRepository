@@ -68,22 +68,28 @@ public class Book implements Serializable {
 	}
 	
 	
-	public Book(int bookId, String title, String author, String publisher, int price) {
-		super();
-		this.bookId = bookId;
-		this.title = title;
-		this.author = author;
-		this.publisher = publisher;
-		this.price = price;
-		
-	}
+	public Book(int bookId, String title, String author, String publisher, int price, String rental) {
+	      super();
+	      this.bookId = bookId;
+	      this.title = title;
+	      this.author = author;
+	      this.publisher = publisher;
+	      this.price = price;      
+	      this.rental = rental;
+	   }
+
+
+	   public Book(int bookId, String title, String author, String publisher, int price) {
+	       this(bookId, title, author, publisher, price, "N");
+	   }
+	
 
 	@Override
 	public String toString() {
 		System.out.println();
 		return "Book [도서번호:" + bookId + ", 도서명:" + title + ", 작가명:" + author +
 										  ", 출판사:" + publisher + ", 도서가격:" + price
-										+ ", 대여정보: N]";
+										+ ",  대여정보:" + rental + "]";
 	}
 
 }
