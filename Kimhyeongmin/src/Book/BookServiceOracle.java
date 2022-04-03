@@ -10,8 +10,8 @@ public class BookServiceOracle extends DAO implements BookService {
 	@Override
 	public void insertBook(Book book) {
 		conn = getConnect();
-		String sql = "insert into book_info  (book_id, title, author, publisher, price, rental)\r\n"
-				+ "values(?, ?, ?, ?, ?, ?)";
+		String sql = "insert into book_info  (book_id, title, author, publisher, price)\r\n"
+				+ "values(?, ?, ?, ?, ? )";
 		try {
 			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서 getBookId 필드값.
 			psmt.setInt(1, book.getBookId());
@@ -19,7 +19,7 @@ public class BookServiceOracle extends DAO implements BookService {
 			psmt.setString(3, book.getAuthor());
 			psmt.setString(4, book.getPublisher());
 			psmt.setInt(5, book.getPrice());
-			psmt.setString(6, book.getRental());
+//			psmt.setString(6, book.getRental());
 
 			int r = psmt.executeUpdate(); // 실행된 건수를 반환해줍니다.
 			System.out.println(r + "건 입력되었습니다.");
