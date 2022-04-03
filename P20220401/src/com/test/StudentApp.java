@@ -16,6 +16,7 @@ public class StudentApp {
 		@Override
 		public void addStudent(Student student) {
 			students.add(student);
+			System.out.println("\n[입력이 완료되었습니다.]\n");
 		}
 
 		@Override
@@ -24,8 +25,12 @@ public class StudentApp {
 			for (int i = 0; i < students.size(); i++) {
 				if (students.get(i).getStudNo() == student.getStudNo()) {
 					students.get(i).setPhone(student.getPhone());
+					students.get(i).setStudName(student.getStudName());
+					System.out.println("\n[전화번호 및 이름 수정이 완료되었습니다.]\n");
+					return;
 				}
 			}
+			System.out.println("\n조회되는 학생 번호가 없습니다.\n");
 		}
 
 		@Override
@@ -43,8 +48,10 @@ public class StudentApp {
 		while (true) {
 			int menu = 0;
 			try {
-				System.out.println("1.입력, 2.수정, 3.리스트보기, 4.종료");
-				System.out.println("선택하세요>>>");
+				System.out.println();
+				System.out.println("==================== 1.입력, 2.수정, 3.리스트보기, 4.종료 ====================");
+				System.out.println();
+				System.out.println("위의 메뉴를 확인하시고, 원하는 메뉴를 선택하세요.");
 				menu = scn.nextInt();
 				// 입력일 경우 고등학생정보와 대학생정보를 구분해서 처리.
 				if (menu == 1) {
@@ -73,25 +80,28 @@ public class StudentApp {
 						String studName = scn.next();
 						System.out.println("연락처를 입력하세요");
 						String phone = scn.next();
-						System.out.println("담당교수님 이름을 입력하세요.");
+						System.out.println("담임선생님 이름을 입력하세요.");
 						String teacherName = scn.next();
-						System.out.println("전공정보를  입력하세요");
+						System.out.println("반이름을  입력하세요.");
 						String groupName = scn.next();
 						HighStudent s2 = new HighStudent(studNo, studName, phone, teacherName, groupName);
 						service.addStudent(s2);
 					}
 				} else if (menu == 2) {
-					System.out.println("수정할 회원의 번호를 입력하세요 ");
+					System.out.println("수정할 학생의 번호를 입력하세요 ");
 					int studNo = scn.nextInt();
 					System.out.println("전화번호를 입력하세요 ");
-					String num = scn.next();
-					Student student = new Student(studNo, null, num);
+					String phone = scn.next();
+					System.out.println("이름을 입력하세요 ");
+					String studName = scn.next();
+					Student student = new Student(studNo, studName, phone);
 					service.modifyStudent(student);
 
 				} else if (menu == 3) {
 					List<Student> student = service.studentList();
 					for (Student s : student) {
 						System.out.println(s.toString());
+				
 					}
 				} else if (menu == 4) {
 					System.out.println("프로그램을 종료합니다. \n");
