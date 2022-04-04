@@ -88,7 +88,7 @@ public class BookApp {
 			System.out.println();
 			System.out.println("=========================이곳은 예담사이버도서관입니다, 원하는 메뉴를 선택하세요.=========================");
 			System.out.println();
-			System.out.println("1.도서 등록 2.도서 전체조회 3.도서 번호로 조회  4.도서 이름으로 조회 5.도서정보 삭제 6.도서정보 수정 7.도서대여 8.도서반납  9.종료");
+			System.out.println("1.도서 등록 2.도서 전체조회 3.도서 번호로조회  4.도서 이름으로조회 5.도서삭제 6.도서 정보수정 7.도서대여 8.도서반납  9.종료");
 			System.out.println(
 					"=============================================================================================");
 
@@ -164,9 +164,7 @@ public class BookApp {
 				int price = scn.nextInt();
 				s2.setPrice(price);
 
-				System.out.println("대출여부를 입력하세요.");
-				String rental = scn.next();
-				s2.setRental(rental);
+				
 
 				service.modifyBook(s2);
 				System.out.println("도서정보 수정이 완료되었습니다.");

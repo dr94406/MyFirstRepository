@@ -95,17 +95,16 @@ public class BookServiceOracle extends DAO implements BookService {
 	@Override // 수정처리
 	public void modifyBook(Book book) {
 		conn = getConnect();
-		String sql = "update book_info " + "set title = ?, " + "author = ?, " + "publisher = ?, " + "price = ?,  "
-				+ "rental = ? " + "where book_id = ?";
+		String sql = "update book_info " + "set title = ?, " + "author = ?, " + "publisher = ?, " + "price = ?  "
+				 + "where book_id = ?";
 		try {
 			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서 필드값.
 			psmt.setString(1, book.getTitle());
 			psmt.setString(2, book.getAuthor());
 			psmt.setString(3, book.getPublisher());
 			psmt.setInt(4, book.getPrice());
-			psmt.setString(5, book.getRental());
-			psmt.setInt(6, book.getBookId());
-
+			psmt.setInt(5, book.getBookId());
+			
 			int r = psmt.executeUpdate(); // 실행된 건수를 반환해줍니다.
 			System.out.println(r + "건 수정되었습니다.");
 		} catch (SQLException e) {
