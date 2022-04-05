@@ -86,11 +86,13 @@ public class BookApp {
 		// 메뉴: 1.추가 2.리스트 3.한건조회(학생번호) 4.수정 5.삭제 6.이름조회(이름) 7.장르로조회 9.종료
 		while (true) {
 			System.out.println();
-			System.out.println("=========================이곳은 예담사이버도서관입니다, 원하는 메뉴를 선택하세요.=========================");
-			System.out.println();
-			System.out.println("1.도서 등록 2.도서 전체조회 3.도서 번호로조회  4.도서 이름으로조회 5.도서삭제 6.도서 정보수정 7.도서대여 8.도서반납  9.종료");
 			System.out.println(
-					"=============================================================================================");
+					"===============================================================================================");
+			System.out.println();
+			System.out.println("1.도서 등록 2.도서전체조회 3.도서번호로조회 4.도서이름으로조회 5.도서삭제 6.도서정보수정 7.도서대여 8.도서반납 9.종료");
+			System.out.println();
+			System.out.println(
+					"===============================================================================================");
 
 			int menu = scn.nextInt();
 			if (menu == 1) {
@@ -109,7 +111,7 @@ public class BookApp {
 
 				System.out.println("도서가격을 입력하세요.");
 				int price = scn.nextInt();
-			
+
 				Book s1 = new Book(bookId, title, author, publisher, price);
 				service.insertBook(s1);
 
@@ -146,17 +148,17 @@ public class BookApp {
 
 			} else if (menu == 6) {
 				Book s2 = new Book();
-				System.out.println("수정할 도서번호를 입력하세요.>>");
+				System.out.println("수정할 도서번호를 입력하세요.");
 				int bookId = scn.nextInt();
 				s2.setBookId(bookId);
-				System.out.println("도서명을 입력하세요.>>");
+				System.out.println("도서명을 입력하세요.");
 				String title = scn.next();
 				s2.setTitle(title);
-				System.out.println("작가명을 입력하세요.>>");
+				System.out.println("작가명을 입력하세요.");
 				String author = scn.next();
 				s2.setAuthor(author);
 
-				System.out.println("출판사를 입력하세요.>>");
+				System.out.println("출판사를 입력하세요.");
 				String publisher = scn.next();
 				s2.setPublisher(publisher);
 
@@ -164,25 +166,27 @@ public class BookApp {
 				int price = scn.nextInt();
 				s2.setPrice(price);
 
-				
-
 				service.modifyBook(s2);
 				System.out.println("도서정보 수정이 완료되었습니다.");
 
 			} else if (menu == 7) {
 				Book s2 = new Book();
-				System.out.println("대여할 도서번호를 입력하세요.>>");
+				System.out.println("대여할 도서번호를 입력하세요.");
 				int bookId = scn.nextInt();
 				s2.setBookId(bookId);
 
 				System.out.println("입력한 도서를 대여하시겠습니까?. 네/아니오");
 				scn.nextLine();
 				String tmp = scn.nextLine();
-				if ("네".equals(tmp)) {
-					s2.setRental("Y");
-					service.rentalBook(s2);
-					System.out.println("도서 대여가 완료되었습니다.");
 
+				if ("네".equals(tmp)) {
+					if (service.getBook(bookId).getRental().equals("Y")) {
+						System.out.println("이미 대여중인 도서입니다.");
+					} else {
+						s2.setRental("Y");
+						service.rentalBook(s2);
+						System.out.println("도서 대여가 완료되었습니다.");
+					}
 				} else if ("아니오".equals(tmp)) {
 					s2.setRental("N");
 					System.out.println("도서대여가 취소되었습니다.");
@@ -193,7 +197,7 @@ public class BookApp {
 
 			} else if (menu == 8) {
 				Book s2 = new Book();
-				System.out.println("반납할 도서번호를 입력하세요.>>");
+				System.out.println("반납할 도서번호를 입력하세요.");
 				int bookId = scn.nextInt();
 				s2.setBookId(bookId);
 
@@ -201,11 +205,10 @@ public class BookApp {
 				scn.nextLine();
 				String tmp = scn.nextLine();
 				if ("네".equals(tmp)) {
-					// 네 일경우 수행될 블럭
 					s2.setRental("N");
-					service.rentalBook(s2);
-					System.out.println("도서 반납이 완료되었습니다.");
-
+						service.rentalBook(s2);
+						System.out.println("도서 반납이 완료되었습니다.");
+						
 				} else if ("아니오".equals(tmp)) {
 					s2.setRental("Y");
 					System.out.println("도서 반납이 취소되었습니다.");

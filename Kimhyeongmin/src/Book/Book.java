@@ -89,7 +89,7 @@ public class Book implements Serializable {
 		System.out.println();
 		return "Book [도서번호:" + bookId + ", 도서명:" + title + ", 작가명:" + author +
 										  ", 출판사:" + publisher + ", 도서가격:" + price
-										+ ",  대여정보:" + rental + "]";
+										+ ", 대여정보:" + rental + "]";
 	}
 
 }

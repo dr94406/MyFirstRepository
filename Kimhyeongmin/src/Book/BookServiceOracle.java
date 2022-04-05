@@ -11,7 +11,7 @@ public class BookServiceOracle extends DAO implements BookService {
 	public void insertBook(Book book) {
 		conn = getConnect();
 		String sql = "insert into book_info  (book_id, title, author, publisher, price)\r\n"
-				+ "values(?, ?, ?, ?, ? )";
+				+ "values(?, ?, ?, ?, ?)";
 		try {
 			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서 getBookId 필드값.
 			psmt.setInt(1, book.getBookId());
@@ -67,7 +67,7 @@ public class BookServiceOracle extends DAO implements BookService {
 
 		conn = getConnect(); // select * from book_info order by book_id;
 		try {
-			psmt = conn.prepareStatement("select * from book_info where rental not in ('Y') order by book_id ");
+			psmt = conn.prepareStatement("select * from book_info where rental not in ('Y') order by book_id");
 			rs = psmt.executeQuery(); // 실행건수만큼 반복자.
 			while (rs.next()) { // 반복자를 통해 요소를 가지고 올 수 있는지 체크. 있으면 하나 가지고 옴.
 				Book book = new Book();
