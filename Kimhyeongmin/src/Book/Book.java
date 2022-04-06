@@ -3,8 +3,10 @@ package Book;
 
 import java.io.Serializable;
 
-public class Book implements Serializable {
-	// 책번호(1,2,3), 책이름(홍길동), 장르 (소설).
+public class Book implements Serializable { // 인터페이스를 구현하기 위해 필요하다. 부모객체는 선언만 하고, 내용은 자식에서 오버라이딩 해야한다. 
+	
+	// 책번호(1,2,3), 도서명(데미안), 작가명(헤르만헤세), 출판사(민음사), 가격(5000), 대여(자동으로 N 값이 들어가게 설정을 해두었다.)
+	
 	private int bookId; // 책 번호
 	private String title; // 도서명
 	private String author; // 작가명

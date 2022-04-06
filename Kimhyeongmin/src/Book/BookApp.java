@@ -85,14 +85,7 @@ public class BookApp {
 		service = new BookServiceOracle();
 		// 메뉴: 1.추가 2.리스트 3.한건조회(학생번호) 4.수정 5.삭제 6.이름조회(이름) 7.장르로조회 9.종료
 		while (true) {
-			System.out.println();
-			System.out.println(
-					"===============================================================================================");
-			System.out.println();
 			System.out.println("1.도서 등록 2.도서전체조회 3.도서번호로조회 4.도서이름으로조회 5.도서삭제 6.도서정보수정 7.도서대여 8.도서반납 9.종료");
-			System.out.println();
-			System.out.println(
-					"===============================================================================================");
 
 			int menu = scn.nextInt();
 			if (menu == 1) {
