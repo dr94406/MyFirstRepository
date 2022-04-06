@@ -243,7 +243,7 @@ public class BookApp {
 				}
 				s2.setBookId(bookId);
 				if (service.getBook(bookId) == null) {
-					System.out.println("대여할 도서가 없는 번호입니다.");
+					System.out.println("책 리스트에 없으므로, 대여할 수 없는 도서입니다.");
 				} else {
 					System.out.println("입력한 도서를 대여하시겠습니까?. Y/N");
 					char a = scn.next().charAt(0);
@@ -286,7 +286,6 @@ public class BookApp {
 				} else {
 					System.out.println("입력한 도서를 반납하시겠습니까?. Y/N");
 					char a = scn.next().charAt(0);
-
 					if (a == 0x4E || a == 0x6E) {
 						System.out.println("아니오");
 						s2.setRental("Y");
