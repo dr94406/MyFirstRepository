@@ -206,29 +206,32 @@ public class BookApp {
 				System.out.println("반납할 도서번호를 입력하세요.");
 				int bookId = scn.nextInt();
 				s2.setBookId(bookId);
-
-				System.out.println("입력한 도서를 반납하시겠습니까?. Y/N");
-				scn.nextLine();
-				String tmp = scn.nextLine();
-				if ("네".equals(tmp)) {
-					s2.setRental("N");
-					service.rentalBook(s2);
-					System.out.println("도서 반납이 완료되었습니다.");
-
-				} else if ("아니오".equals(tmp)) {
-					s2.setRental("Y");
-					System.out.println("도서 반납이 취소되었습니다.");
+				if (service.getBook(bookId) == null) {
+					System.out.println("반납할 도서가 없는 번호입니다.");
 
 				} else {
-					System.out.println("입력한 값이 유효하지 않습니다.");
+					System.out.println("입력한 도서를 반납하시겠습니까?. Y/N");
+					char a = scn.next().charAt(0);
+
+					if (a == 0x4E || a == 0x6E) {
+						System.out.println("아니오");
+						s2.setRental("Y");
+						System.out.println("도서반납이 취소되었습니다.");
+
+					} else if (a == 0x59 || a == 0x79) {
+						System.out.println("네");
+					
+						if (service.getBook(bookId).getRental().equals("N")) {
+							System.out.println("빌리지 않은 도서입니다.");
+					} else {
+						s2.setRental("N");
+						service.rentalBook(s2);
+						System.out.println("도서 반납이 완료되었습니다.");
+					}
+				} else {
+						System.out.println("입력한 값이 유효하지 않습니다.");
+					}
 				}
-
-//				String rental = scn.next();
-//				s2.setRental(rental);		
-//				service.rentalBook(s2);
-//				System.out.println("도서 반납이 완료되었습니다.");
-//				
-
 			} else if (menu == 9) {
 				System.out.println("프로그램을 종료하겠습니다.");
 				service.saveToFile();
