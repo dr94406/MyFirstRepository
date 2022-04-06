@@ -87,8 +87,9 @@ public class BookApp {
 		// 메뉴: 1.추가 2.리스트 3.한건조회(학생번호) 4.수정 5.삭제 6.이름조회(이름) 7.장르로조회 9.종료
 		while (true) {
 			System.out.println();
+			System.out.println("-----------------------------------------------------------------------------------");
 			System.out.println("1.도서 등록 2.도서전체조회 3.도서번호로조회 4.도서이름으로조회 5.도서삭제 6.도서정보수정 7.도서대여 8.도서반납 9.종료");
-
+			System.out.println("-----------------------------------------------------------------------------------");
 			int menu = scn.nextInt();
 			if (menu == 1) {
 				// 책정보 추가입력. : 책번호, 책이름, 책저자,책제작사,책금액 입력
@@ -96,21 +97,21 @@ public class BookApp {
 				while (true) {
 					System.out.println("도서번호를 입력하세요.");
 					try {
+						scn.nextLine();
 						bookId = scn.nextInt();
 						break;
 					} catch (InputMismatchException e) {
-						scn.nextLine();
-						System.out.println("다시 한 번 입력해주세요.");
+						System.out.println("도서번호가 아닙니다, 다시 한 번 입력해주세요.");
 						continue;
 					}
 				}
-				System.out.println("도서이름을 입력하세요.");
-				String title = scn.nextLine();
+				System.out.println("도서명을 입력하세요.");
+				String title = scn.next();
+				scn.nextLine();
 				System.out.println("작가명을 입력하세요.");
 				String author = scn.nextLine();
 				System.out.println("출판사를 입력하세요.");
-				String publisher = scn.next();
-				scn.nextLine();
+				String publisher = scn.nextLine();
 				int price;
 				while (true) {
 					System.out.println("도서가격을 입력하세요.");
@@ -118,7 +119,7 @@ public class BookApp {
 						price = scn.nextInt();
 					} catch (InputMismatchException e) {
 						scn.nextLine();
-						System.out.println("다시 한 번 입력해주세요.");
+						System.out.println("입력 타입이 맞지않습니다, 다시 한 번 입력해주세요.");
 						continue;
 					}
 					scn.nextLine();
@@ -140,18 +141,17 @@ public class BookApp {
 						scn.nextLine();
 						bookId = scn.nextInt();
 					} catch (InputMismatchException e) {
-						scn.nextLine();
-						System.out.println("다시 한 번 입력해주세요.");
+						System.out.println("입력 타입이 맞지않습니다, 다시 한 번 입력해주세요.");
 						continue;
 					}
 					Book book = service.getBook(bookId);
 					System.out.println();
 					if (book == null) {
 						System.out.println("조회된 번호가 없습니다, 다시입력해주세요.");
-
 					} else {
 						System.out.println(book.toString());
 					}
+					break;
 				}
 			} else if (menu == 4) { // 이름으로 조회
 				System.out.println("조회할 도서이름을 입력하세요.");
@@ -164,48 +164,52 @@ public class BookApp {
 				}
 
 			} else if (menu == 5) { // 삭제.
+				Book s2 = new Book();
 				int number;
+				int bookId = 0;
 				while (true) {
 					System.out.println("삭제할 도서번호를 입력하세요.");
 					try {
+						scn.nextLine();
 						number = scn.nextInt();
 						service.removeBook(number);
 						break;
 					} catch (InputMismatchException e) {
-						scn.nextLine();
-						System.out.println("다시 한 번 입력해주세요.");
+						System.out.println("입력 타입이 맞지않습니다, 다시 한 번 입력해주세요.");
 						continue;
 					}
 				}
-				System.out.println("삭제");
-
 			} else if (menu == 6) {
 				Book s2 = new Book();
 				int bookId;
 				while (true) {
 					System.out.println("수정할 도서번호를 입력하세요.");
 					try {
+						scn.nextLine();
 						bookId = scn.nextInt();
+						s2.setBookId(bookId);
+						scn.nextLine();
 						break;
 					} catch (InputMismatchException e) {
-						scn.nextLine();
-						System.out.println("다시 한 번 입력해주세요.");
+						System.out.println("입력 타입이 맞지않습니다, 다시 한 번 입력해주세요.");
 						continue;
 					}
 				}
-				scn.nextLine();
-				s2.setBookId(bookId);
+				Book book = service.getBook(bookId);
+				System.out.println();
+				if (book == null) {
+					scn.nextLine();
+					System.out.println("유효하지 않는 번호입니다, 수정할 번호를 다시입력해주세요.");
+					bookId = scn.nextInt();
+				}
 				System.out.println("도서명을 입력하세요.");
-				String title = scn.next();
-				scn.nextLine();
+				String title = scn.nextLine();
 				s2.setTitle(title);
 				System.out.println("작가명을 입력하세요.");
-				String author = scn.next();
-				scn.nextLine();
+				String author = scn.nextLine();
 				s2.setAuthor(author);
 				System.out.println("출판사를 입력하세요.");
-				String publisher = scn.next();
-				scn.nextLine();
+				String publisher = scn.nextLine();
 				s2.setPublisher(publisher);
 				int price;
 				while (true) {
@@ -240,18 +244,15 @@ public class BookApp {
 				s2.setBookId(bookId);
 				if (service.getBook(bookId) == null) {
 					System.out.println("대여할 도서가 없는 번호입니다.");
-
 				} else {
 					System.out.println("입력한 도서를 대여하시겠습니까?. Y/N");
 					char a = scn.next().charAt(0);
-
 					if (a == 0x4E || a == 0x6E) {
 						System.out.println("아니오");
 						s2.setRental("N");
 						System.out.println("도서대여가 취소되었습니다.");
 					} else if (a == 0x59 || a == 0x79) {
 						System.out.println("네");
-
 						if (service.getBook(bookId).getRental().equals("Y")) {
 							System.out.println("이미 대여중인 도서입니다.");
 
@@ -282,7 +283,6 @@ public class BookApp {
 				s2.setBookId(bookId);
 				if (service.getBook(bookId) == null) {
 					System.out.println("반납할 도서가 없는 번호입니다.");
-
 				} else {
 					System.out.println("입력한 도서를 반납하시겠습니까?. Y/N");
 					char a = scn.next().charAt(0);
