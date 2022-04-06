@@ -15,7 +15,7 @@ public class DAO {
   Connection conn;
   Statement stmt;
   ResultSet rs;
-  PreparedStatement psmt;
+  PreparedStatement psmt; //psmt는 sql 구문을 실행하는 역할
 
   public Connection getConnect() {
      try { // DB 연결하는 부분

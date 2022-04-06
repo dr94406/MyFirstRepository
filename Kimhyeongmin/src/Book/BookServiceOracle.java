@@ -11,7 +11,7 @@ public class BookServiceOracle extends DAO implements BookService {
 		conn = getConnect();
 		String sql = "insert into book_info  (book_id, title, author, publisher, price)\r\n"
 				+ "values(?, ?, ?, ?, ?)";
-		try {
+		try { // 
 			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서 getBookId 필드값.
 			psmt.setInt(1, book.getBookId());
 			psmt.setString(2, book.getTitle());
