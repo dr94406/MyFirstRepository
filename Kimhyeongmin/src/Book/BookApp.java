@@ -219,7 +219,7 @@ public class BookApp {
 						break;
 					} catch (InputMismatchException e) {
 						scn.nextLine();
-						System.out.println("다시 한 번 입력해주세요.");
+						System.out.println("입력 타입이 맞지않습니다, 다시 한 번 입력해주세요.");
 						continue;
 					}
 				}
@@ -237,7 +237,7 @@ public class BookApp {
 						break;
 					} catch (InputMismatchException e) {
 						scn.nextLine();
-						System.out.println("다시 한 번 입력해주세요.");
+						System.out.println("입력 타입이 맞지않습니다, 다시 한 번 입력해주세요.");
 						continue;
 					}
 				}
@@ -276,7 +276,7 @@ public class BookApp {
 						break;
 					} catch (InputMismatchException e) {
 						scn.nextLine();
-						System.out.println("다시 한 번 입력해주세요.");
+						System.out.println("입력 타입이 맞지않습니다, 다시 한 번 입력해주세요.");
 						continue;
 					}
 				}
