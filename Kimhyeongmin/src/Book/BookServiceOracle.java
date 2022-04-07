@@ -9,9 +9,8 @@ public class BookServiceOracle extends DAO implements BookService {
 	@Override
 	public void insertBook(Book book) {
 		conn = getConnect();
-		String sql = "insert into book_info  (book_id, title, author, publisher, price)\r\n"
-				+ "values(?, ?, ?, ?, ?)";
-		try { // 
+		String sql = "insert into book_info  (book_id, title, author, publisher, price)\r\n" + "values(?, ?, ?, ?, ?)";
+		try { //
 			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서 getBookId 필드값.
 			psmt.setInt(1, book.getBookId());
 			psmt.setString(2, book.getTitle());
@@ -27,6 +26,7 @@ public class BookServiceOracle extends DAO implements BookService {
 			disconnect();
 		}
 	}
+
 	// 한 건 조회. (책번호로)
 	@Override
 	public Book getBook(int aoa) { // 매개변수 타입
@@ -53,6 +53,7 @@ public class BookServiceOracle extends DAO implements BookService {
 		}
 		return book;
 	}
+
 	// 전체조회
 	@Override
 	public List<Book> bookList() {
@@ -78,11 +79,12 @@ public class BookServiceOracle extends DAO implements BookService {
 		}
 		return list;
 	}
+
 	@Override // 수정처리
 	public void modifyBook(Book book) {
 		conn = getConnect();
 		String sql = "update book_info " + "set title = ?, " + "author = ?, " + "publisher = ?, " + "price = ?  "
-				 + "where book_id = ?";
+				+ "where book_id = ?";
 		try {
 			psmt = conn.prepareStatement(sql); // ? <= 매개변수값중에서 필드값.
 			psmt.setString(1, book.getTitle());
@@ -99,6 +101,7 @@ public class BookServiceOracle extends DAO implements BookService {
 			disconnect();
 		}
 	}
+
 	// 삭제처리
 	@Override
 	public void removeBook(int glo) {
@@ -115,25 +118,31 @@ public class BookServiceOracle extends DAO implements BookService {
 			disconnect();
 		}
 	}
+
 	@Override // 이름으로로 조회 기능.
 	public List<Book> searchBook(String gro) {
 		List<Book> Books = new ArrayList<Book>();
 		conn = getConnect();
 		Book gra = null;
-		String sql = "select * from book_info where title = ?";
+		String sql = "select * from book_info where title like '%" + gro + "%'order by book_Id";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, gro);
+//			psmt.setString(1, gro);
 			rs = psmt.executeQuery(); // 실행건수만큼 반복자.
-			if (rs.next()) {
-				gra = new Book();
-				gra.setBookId(rs.getInt("book_id")); // 값을 읽어와서 지정하겠습니다.
-				gra.setTitle(rs.getString("title"));
-				gra.setAuthor(rs.getString("author"));
-				gra.setPublisher(rs.getString("publisher"));
-				gra.setPrice(rs.getInt("price"));
-				gra.setRental(rs.getString("rental"));
-				Books.add(gra);
+			while (true) {
+				if (rs.next()) {
+					gra = new Book();
+					gra.setBookId(rs.getInt("book_id")); // 값을 읽어와서 지정하겠습니다.
+					gra.setTitle(rs.getString("title"));
+					gra.setAuthor(rs.getString("author"));
+					gra.setPublisher(rs.getString("publisher"));
+					gra.setPrice(rs.getInt("price"));
+					gra.setRental(rs.getString("rental"));
+					Books.add(gra);
+				} else {
+					System.out.println("조회결과가 없습니다");
+					break;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -142,10 +151,12 @@ public class BookServiceOracle extends DAO implements BookService {
 		}
 		return Books;
 	}
+
 	@Override
 	public void saveToFile() { // 안해도됨.
 	}
-	@Override // 대여기능 
+
+	@Override // 대여기능
 	public void rentalBook(Book book) {
 		conn = getConnect();
 		String sql = "update book_info " + "set rental = ? " + "where book_id = ?";

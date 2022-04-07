@@ -87,27 +87,29 @@ public class BookApp {
 		// 메뉴: 1.추가 2.리스트 3.한건조회(학생번호) 4.수정 5.삭제 6.이름조회(이름) 7.장르로조회 9.종료
 		while (true) {
 			System.out.println();
-			System.out.println("-----------------------------------------------------------------------------------");
-			System.out.println("1.도서 등록 2.도서전체조회 3.도서번호로조회 4.도서이름으로조회 5.도서삭제 6.도서정보수정 7.도서대여 8.도서반납 9.종료");
-			System.out.println("-----------------------------------------------------------------------------------");
+			System.out.println("반갑습니다, 도서 관리 프로그램에 오신것을 환영합니다.\n아래의 메뉴 중 원하는 것을 선택하세요.");
+			System.out.println();
+			System.out.println("\n[1.도서 등록 기능] \n[2.도서 전체 조회기능] \n[3.도서 번호로 조회기능]\n[4.도서 이름으로 조회기능]\n[5.도서 삭제기능]\n[6.도서 정보 수정기능]\n[7.도서 대여기능]\n[8.도서 반납기능]\n[9.종료]");
 			int menu = scn.nextInt();
+			scn.nextLine();
 			if (menu == 1) {
 				// 책정보 추가입력. : 책번호, 책이름, 책저자,책제작사,책금액 입력
 				int bookId;
 				while (true) {
+					System.out.println();
 					System.out.println("도서번호를 입력하세요.");
 					try {
 						scn.nextLine();
 						bookId = scn.nextInt();
 						break;
 					} catch (InputMismatchException e) {
-						System.out.println("도서번호가 아닙니다, 다시 한 번 입력해주세요.");
+						System.out.println("입력한 타입이 맞지않습니다.");
 						continue;
 					}
 				}
 				System.out.println("도서명을 입력하세요.");
-				String title = scn.next();
 				scn.nextLine();
+				String title = scn.nextLine();
 				System.out.println("작가명을 입력하세요.");
 				String author = scn.nextLine();
 				System.out.println("출판사를 입력하세요.");
@@ -119,7 +121,7 @@ public class BookApp {
 						price = scn.nextInt();
 					} catch (InputMismatchException e) {
 						scn.nextLine();
-						System.out.println("입력 타입이 맞지않습니다, 다시 한 번 입력해주세요.");
+						System.out.println("입력한 타입이 맞지않습니다.");
 						continue;
 					}
 					scn.nextLine();
@@ -141,7 +143,7 @@ public class BookApp {
 						scn.nextLine();
 						bookId = scn.nextInt();
 					} catch (InputMismatchException e) {
-						System.out.println("입력 타입이 맞지않습니다, 다시 한 번 입력해주세요.");
+						System.out.println("입력한 타입이 맞지않습니다.");
 						continue;
 					}
 					Book book = service.getBook(bookId);
@@ -155,8 +157,7 @@ public class BookApp {
 				}
 			} else if (menu == 4) { // 이름으로 조회
 				System.out.println("조회할 도서이름을 입력하세요.");
-				String searchTitle = scn.next();
-				scn.nextLine();
+				String searchTitle = scn.nextLine();
 				List<Book> list = service.searchBook(searchTitle);
 				System.out.println();
 				for (Book s : list) {
@@ -175,10 +176,10 @@ public class BookApp {
 						service.removeBook(number);
 						break;
 					} catch (InputMismatchException e) {
-						System.out.println("입력 타입이 맞지않습니다, 다시 한 번 입력해주세요.");
+						System.out.println("입력한 타입이 맞지않습니다.");
 						continue;
 					}
-				}
+				} 
 			} else if (menu == 6) {
 				Book s2 = new Book();
 				int bookId;
@@ -191,9 +192,9 @@ public class BookApp {
 						scn.nextLine();
 						break;
 					} catch (InputMismatchException e) {
-						System.out.println("입력 타입이 맞지않습니다, 다시 한 번 입력해주세요.");
+						System.out.println("입력한 타입이 맞지않습니다.");
 						continue;
-					}
+					} 
 				}
 				Book book = service.getBook(bookId);
 				System.out.println();
@@ -219,7 +220,7 @@ public class BookApp {
 						break;
 					} catch (InputMismatchException e) {
 						scn.nextLine();
-						System.out.println("입력 타입이 맞지않습니다, 다시 한 번 입력해주세요.");
+						System.out.println("입력한 타입이 맞지않습니다.");
 						continue;
 					}
 				}
@@ -237,13 +238,13 @@ public class BookApp {
 						break;
 					} catch (InputMismatchException e) {
 						scn.nextLine();
-						System.out.println("입력 타입이 맞지않습니다, 다시 한 번 입력해주세요.");
+						System.out.println("입력한 타입이 맞지않습니다.");
 						continue;
 					}
 				}
 				s2.setBookId(bookId);
 				if (service.getBook(bookId) == null) {
-					System.out.println("책 리스트에 없으므로, 대여할 수 없는 도서입니다.");
+					System.out.println("대여할 수 없는 도서입니다.");
 				} else {
 					System.out.println("입력한 도서를 대여하시겠습니까?. Y/N");
 					char a = scn.next().charAt(0);
@@ -276,7 +277,7 @@ public class BookApp {
 						break;
 					} catch (InputMismatchException e) {
 						scn.nextLine();
-						System.out.println("입력 타입이 맞지않습니다, 다시 한 번 입력해주세요.");
+						System.out.println("입력한 타입이 맞지않습니다.");
 						continue;
 					}
 				}
