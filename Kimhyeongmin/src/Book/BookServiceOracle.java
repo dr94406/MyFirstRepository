@@ -140,7 +140,7 @@ public class BookServiceOracle extends DAO implements BookService {
 					gra.setRental(rs.getString("rental"));
 					Books.add(gra);
 				} else {
-					System.out.println("조회결과가 없습니다");
+					System.out.println("조회되지 않았습니다.");
 					break;
 				}
 			}

@@ -85,13 +85,21 @@ public class BookApp {
 //						service = new StudentServiceFile();
 		service = new BookServiceOracle();
 		// 메뉴: 1.추가 2.리스트 3.한건조회(학생번호) 4.수정 5.삭제 6.이름조회(이름) 7.장르로조회 9.종료
+		int menu;
 		while (true) {
 			System.out.println();
 			System.out.println("반갑습니다, 도서 관리 프로그램에 오신것을 환영합니다.\n아래의 메뉴 중 원하는 것을 선택하세요.");
 			System.out.println();
 			System.out.println("\n[1.도서 등록 기능] \n[2.도서 전체 조회기능] \n[3.도서 번호로 조회기능]\n[4.도서 이름으로 조회기능]\n[5.도서 삭제기능]\n[6.도서 정보 수정기능]\n[7.도서 대여기능]\n[8.도서 반납기능]\n[9.종료]");
-			int menu = scn.nextInt();
-			scn.nextLine();
+			try {
+				scn.nextLine();
+				menu = scn.nextInt();
+			} catch (InputMismatchException e) {
+				scn.nextLine();
+				System.out.println("해당하는 메뉴가 없습니다. 다시입력해주세요.");
+				continue;
+			}
+			
 			if (menu == 1) {
 				// 책정보 추가입력. : 책번호, 책이름, 책저자,책제작사,책금액 입력
 				int bookId;
@@ -313,5 +321,5 @@ public class BookApp {
 			}
 		} // end of while()
 		System.out.println("end of program");
-	}
-}
+	}}
+	
