@@ -20,7 +20,7 @@
 		xhtp.open("get", "../studentList.json"); // 호출요청 할 페이지 지정.
 		xhtp.send(); // 호출시작.
 		xhtp.onload = function() { // 이벤트가 시작되면 펑션실행 하라는 뜻
-			let data = JSON.parse(xhtp.response); // [{},{},{}]
+			let data = JSON.parse(xhtp.response); // [{student_no},{engscore},{korscore}]
 			console.log(data);
 			data.forEach(function(elem){
 			document.getElementById('list').appendChild(makeTr(elem))
