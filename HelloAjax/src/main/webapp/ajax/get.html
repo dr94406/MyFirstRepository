@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax/get.html</title>
+</head>
+<body>
+	<div id="show">
+		<table border="1">
+		<thead>
+			<tr><th>학생번호</th><th><학생이름></th><th>영어</th><th>국어</th></tr>
+		</thead>
+		<tbody id="list"> <!-- tbody안에 들어갈 요소인 list를 아이디로 지정. -->
+		</tbody>
+		</table>
+		</div>
+	<script>
+		// 서버에 파일을 요청하고 읽어들이도록.
+		let xhtp = new XMLHttpRequest(); // new String();
+		xhtp.open("get", "../studentList.json"); // 호출요청 할 페이지 지정.
+		xhtp.send(); // 호출시작.
+		xhtp.onload = function() { // 이벤트가 시작되면 펑션실행 하라는 뜻
+			let data = JSON.parse(xhtp.response); // [{},{},{}]
+			console.log(data);
+			data.forEach(function(elem){
+			document.getElementById('list').appendChild(makeTr(elem))
+			})
+			};
+			
+	function makeTr(student) {	// 표 안에 담을 그릇
+		  let tr = document.createElement('tr'); // tr태그 생성
+   for (let field in student) { // student['studNo'] // 이 필드 안에 학생이 있다면
+    let td = document.createElement('td'); // td태그 생성
+    td.innerHTML = student[field];
+    tr.appendChild(td);
+  } 
+
+
+  // 버튼으로 삭제하는 이벤트 생성.
+    
+  return tr;
+	}
+	
+	</script>
+</body>
+</html>
