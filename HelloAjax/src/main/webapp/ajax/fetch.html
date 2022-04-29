@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>ajax/fetch.html</title>
+	<script src="ajax2.js"></script>
+</head>
+
+<body>
+	<script>
+	// Ajax => XMLHttpRequest: => fetch();
+	let xhtp = new XMLHttpRequest();
+	xhtp.open('get', '../studentList.json'); // 위치 지정해서 아작스로 studentList의 데이터를 가져옴 
+	xhtp.send();
+	xhtp.onload = function() {
+		console.log('xmlhttprequest')
+		console.log(xhtp.responseText)
+	
+		let xhtp2 = new XMLHttpRequest();
+		
+		xhtp2.onload = function() {
+		
+	  }
+	}
+	
+	fetch('../studentList.json')
+		.then(function(result) { // 성공 시 실행
+			let val = result.json(); // pending 제이슨 객체로 변경 stream -> json(), text()
+			return val;
+		})
+		.then(function(result) {
+			console.log(result);
+		})
+		.catch(function(error) { // 실패 시 실행
+			console.log(error);
+		});
+	
+	</script>
+</body>
+
+</html>

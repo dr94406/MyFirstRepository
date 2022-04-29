@@ -1,20 +1,142 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>openAPI.html</title>
+	<meta charset="UTF-8">
+	<title>openAPI.html</title>
 </head>
+
 <body>
-	<script>
-	let url = `https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=10&returnType=JSON&serviceKey=1qoGo1jV7IKNAOLx4Rpnt%2BuqvsgBDc5b452GQLFhPdWkWxA6qZWHGtGPl2eSD1oRtwPW3Ai5kFV%2BsH%2BlSl1GNA%3D%3D`
 	
-	let xhtp = new XMLHttpRequest(); 
+	<input type="text" id="sido" value="대전광역시"><button id="findBtn">찾기</button>
+	<hr>
+	
+	<div id="show">
+		<table border="1">
+		  <thead id="thead"></thead>	
+		  <tbody id="tbody"></tbody>	
+		</table>
+	</div>
+		
+	<script>
+		console.log('start');
+	let fields = ['id', 'sido', 'address', 'phoneNumber', 'zipCode'];
+	
+	
+	//this.
+	let obj = {
+	 name: 'Hong',
+	 age: 20,
+	 showInfo: function() {
+	 	return this.name + ', ' + this.age; // 자기자신의 이름+ 나이 리턴.
+	 }
+	}
+	
+	function globalFnc() {
+		console.log(this); // window객체(최상위)
+	}
+	globalFnc();
+	
+	function init() {
+	let url = 
+	   `https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=284&returnType=JSON&serviceKey=1qoGo1jV7IKNAOLx4Rpnt%2BuqvsgBDc5b452GQLFhPdWkWxA6qZWHGtGPl2eSD1oRtwPW3Ai5kFV%2BsH%2BlSl1GNA%3D%3D`
+	// 비동기처리 방식(Asychronous JavaScript And Xml) AJAX
+	let result = '';
+	let xhtp = new XMLHttpRequest(); // 비동기처리 방식 (Asychronous)으로 처리 그냥 ajax임.
 	xhtp.open ('get', url);
 	xhtp.send();
-	xhtp.onload = function() {
-		let data = JSON.parse(xhtp.responseText);
-		console.log(data);
+	xhtp.onload = loadCallBack;
+	
+	// 찾기버튼 만들기.
+	let findBtn = document.getElementById("findBtn");
+	findBtn.addEventListener('click', findCallBack);// 이벤트가 발생하면 실행 할 콜백함수.
 	}
+	init(); // 실행.
+	
+	
+	function findCallBack () { // 이벤트에 존재하는 콜백함수.
+		console.log(this);
+		// 기능구현. input.value 속성을 읽어와서 filterAry => 헤더, 바디.
+		let searchSido = document.getElementById("sido").value;
+		
+		let filterAry = result.data.filter(function(elem) {
+	 	 	//return elem.sido.startsWith(searchSido); // startsWith(문자)
+	 	 	return elem.sido.indexOf(searchSido) != -1; // 포함.
+	 	});
+		
+		makeBody(filterAry);
+		
+		// 입력값을 지우기.
+		document.getElementById("sido").value = '';
+		
+	} // end of findCallBack ()
+	console.log('end');
+		
+	
+	
+	function loadCallBack() { // 로드 콜백함수 (온 로드 호출)
+	 console.log('center');
+	 result = JSON.parse(this.responseText); // 자기자신을 가르침, responseText 결과값을 가져옴.
+	 console.log(result); // 위에 담아온 데이터를 콘솔로 보여줌.
+	 console.log("총건수: " + result.totalCount); // totalCount 284라는 값이 찍힌다, 비 동기 처리방식인 ajax로 처리됨.
+
+	 console.log(result.data[0]); // result 안의 첫번째 데이터 출력하여 보여줌.	
+
+	 result.data.forEach(function (elem) {
+	 	if (elem.sido == '서울특별시')
+	 	console.log(`id: ${elem.id}, center: ${elem.centerName}`)
+	 	});
+
+		// {totalCount, data,}	 
+	 	let filterAry = result.data.filter(function(elem) {
+	 		return elem.sido == '대전광역시';
+	 	});
+	 	console.log(filterAry); // 필터데이터로 대전광역시 헤드 생성.
+	 	
+	 	// head 생성.
+	 	let head = document.getElementById('thead');
+	 	let tr =  document.createElement('tr');
+	 	head.appendChild(tr);
+	 	fields.forEach(function(elem) {
+	 		let td = document.createElement('th');
+	 		td.innerHTML = elem.toUpperCase();
+	 		tr.appendChild(td);
+	 	}) 	
+	 	
+	 	makeBody(filterAry)	 	
+	} // end of loadCallBack()
+	
+	function makeBody(ary) {
+		// 이미 생성된 조회정보가 있으면 삭제.
+		// body 생성.
+	 	let body = document.getElementById('tbody');
+		let childTr = document.querySelectorAll('#tbody>tr');
+		childTr.forEach(function(elem) {
+			//elem.remove(); // tr 삭제. (본인 요소를 지우는 것.)
+			body.removeChild(elem) // 부모를 기준으로 하위요소를 지우겠습니다.
+		});
+		
+		
+		ary.forEach(function(center) {
+			let tr = document.createElement('tr');
+			body.appendChild(tr);
+			
+			fields.forEach(function(elem) {
+			let td = document.createElement('td');
+			// address 필드 일 경우에는 링크.
+			if (elem == 'address') {
+			  let aTag = document.createElement('a');
+			  aTag.setAttribute('href', `daumApi.html?k=유봉장수&x=${center.lat}&y=${center.lng}`);
+			  aTag.setAttribute('target', '_blank');
+			  aTag.innerHTML = center[elem];
+			  td.appendChild(aTag);					
+			} else{
+			 td.innerHTML = center[elem];
+			}
+			tr.appendChild(td);
+			});		
+		});
+	} // end of makeBody()
 	</script>
 </body>
 </html>
