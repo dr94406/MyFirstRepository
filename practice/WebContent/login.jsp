@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1">
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/custom.css">
 <title>JSP 게시판 웹 사이트</title>
 </head>
 <body>
@@ -48,7 +49,7 @@
 							name="userID" maxlength="20">
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control" placeholder="비밀번호"name="userId" maxlength="20">
+						<input type="password" class="form-control" placeholder="비밀번호"name="userPassword" maxlength="20">
 					</div>
 					<input type="submit" class="btn btn-primary form-control" value="로그인">
 				</form>
