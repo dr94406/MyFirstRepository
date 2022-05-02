@@ -31,15 +31,15 @@ public class StudentDAO extends DAO {
 	}
 
 	// 수정,
-	public boolean modifyStudent(Student std) {
+	public boolean modifyStudent(Student stud) {
 		conn = getConnect();
 		String sql = "update student_info set student_name=?, eng_Score=?, kor_Score=? where student_no=?";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, std.getStudentName());
-			psmt.setInt(2, std.getEngScore());
-			psmt.setInt(3, std.getKorScore());
-			psmt.setInt(4, std.getStudentNo());
+			psmt.setString(1, stud.getStudentName());
+			psmt.setInt(2, stud.getEngScore());
+			psmt.setInt(3, stud.getKorScore());
+			psmt.setInt(4, stud.getStudentNo());
 
 			int r = psmt.executeUpdate();
 			System.out.println(r + "건 변경.");

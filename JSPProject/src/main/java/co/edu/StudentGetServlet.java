@@ -38,8 +38,8 @@ public class StudentGetServlet extends HttpServlet {
 				response.getWriter().println("<form action='StudentGetServlet' method='post'>");
 				response.getWriter().println("<h3>학생번호: " + student.getStudentNo() + "</h3>");
 				response.getWriter().println("<h3>학생이름: " + student.getStudentName() + "</h3>");
-				response.getWriter().println("<h3>영어점수: <input type='number' name='eng_score' value=" + student.getEngScore() + "'></input></h3>");
-				response.getWriter().println("<h3>국어점수: <input type='number' name='kor_score' value=" + student.getKorScore() + "'></input></h3>");
+				response.getWriter().println("<h3>영어점수: <input type='number' name='eng_score' value=" + student.getEngScore() + "></input></h3>");
+				response.getWriter().println("<h3>국어점수: <input type='number' name='kor_score' value=" + student.getKorScore() + "></input></h3>");
 				response.getWriter().println("<input type='hidden' name='cmd' value='mod'>");
 				response.getWriter().println("<input type='hidden' name='user_id' value=" +student.getStudentNo()+">");
 				response.getWriter().println("<input type='hidden' name='user_name' value= " +student.getStudentName()+">");
@@ -99,7 +99,8 @@ public class StudentGetServlet extends HttpServlet {
 			stud.setKorScore(Integer.parseInt(kor));
 
 			dao.addStudent(stud);
-
+			
+			response.sendRedirect("studentList.jsp");
 			//response.getWriter().print("정상적으로 입력되었습니다.");
 
 			// 한 건 삭제기능.
@@ -110,11 +111,13 @@ public class StudentGetServlet extends HttpServlet {
 			if (dao.removeStudent(id)) {
 				response.getWriter().print("<script>alert('삭제 성공하였습니다.')</script>");
 			} else {
-				response.getWriter().print("<script>alert('삭제 실패하였습니다')</script>");
+				response.getWriter().print("<script>alert('삭제할 값을 다시 넣어주세요.')</script>");
+				
 			}
+			response.getWriter().println("<a href='studentList.jsp'>목록으로 이동</a>");
 
 			// 한 건 수정기능
-		} else if (cmd != null && cmd.equals("mod")) {
+		} else if (cmd != null && cmd.equals("mod")) {	
 			// 사용자 입력 파라메터 =>
 			Student stud = new Student();
 
@@ -130,10 +133,12 @@ public class StudentGetServlet extends HttpServlet {
 			
 			StudentDAO dao = new StudentDAO();
 			dao.modifyStudent(stud);
+
+			response.sendRedirect("studentList.jsp");
 			
 			//response.getWriter().print("정상적으로 수정되었습니다.");
 		}
-		response.sendRedirect("studentList.jsp");
+		
 	} // end of doPost()
 
 } // end of class

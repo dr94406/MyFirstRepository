@@ -13,16 +13,23 @@
 	<table border="1">
 		<caption>학생목록</caption>
 		<thead>
-			<tr><th>학생번호</th><th>학생이름</th><th>영어점수</th><th>국어점수</th></tr>
+			<tr>
+				<th>학생번호</th>
+				<th>학생이름</th>
+				<th>영어점수</th>
+				<th>국어점수</th>
+			</tr>
 		</thead>
 		<tbody>
 			<%
-			  StudentDAO dao = new StudentDAO();
-			  List<Student> list = dao.studentList();
-			  for (Student student : list) {
-			  out.print("<tr><td><a href='StudentGetServlet?cmd=search&user_id="+student.getStudentNo()+"'>"+student.getStudentNo()+"</a></td><td>"+student.getStudentName()+"</td><td>"+student.getEngScore()+"</td><td>"+student.getKorScore()+"</td></tr>");
-			 
-			  }
+				StudentDAO dao = new StudentDAO();
+				List<Student> list = dao.studentList();
+				for (Student student : list) {
+					out.print("<tr><td><a href=StudentGetServlet?cmd=search&user_id=" + student.getStudentNo() + ">"
+							+ student.getStudentNo() + "</a></td><td>" + student.getStudentName() + "</td><td>"
+							+ student.getEngScore() + "</td><td>" + student.getKorScore() + "</td></tr>");
+
+				}
 			%>
 		</tbody>
 	</table>

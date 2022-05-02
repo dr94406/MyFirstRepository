@@ -19,7 +19,7 @@
 		<input id="addBtn" type="button" value="입력">
 		<input id="modBtn" type="button" value="수정"> 
 		<input id="delBtn" type="button" value="삭제"><br>
-		<a href="/JSPProject/studentList.jsp">학생목록</a>
+		<a href="./studentList.jsp">학생목록</a>
 		<!--  다른기능 구현하고 싶을 시 파라메터 조정 -->
 	</form>
 
@@ -32,6 +32,7 @@
 			frm.cmd.value = "mod"; // 값은 del
 			frm.submit(); // submit버튼 클릭하는 기능.
 		});
+		
 		
 		// 한 건 삭제기능.
 		let delBtn = document.getElementById('delBtn');
