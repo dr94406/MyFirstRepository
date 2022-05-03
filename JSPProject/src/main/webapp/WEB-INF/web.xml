@@ -8,6 +8,10 @@
 	<servlet>
 		<servlet-name>studentServlet</servlet-name>
 		<servlet-class>co.edu.StudentServlet</servlet-class> <!--  밑에서 *을 사용하게 되면, 어떠한 주소를 쳐도 .do로 끝나면 이 클래스를 호출. -->
+		<init-param>
+		<param-name>charset</param-name>
+		<param-value>UTF-8</param-value>
+		</init-param>
 	</servlet>
 	<servlet-mapping>
 	<servlet-name>studentServlet</servlet-name>
