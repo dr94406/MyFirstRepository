@@ -28,22 +28,26 @@ public class MemberDAO extends DAO { // co.dev.DAO를 상속받음.
 		}
 	}
 
-	public void deleteMember(MemberVO member) {
+	public void deleteMember(String id) {
 		conn = getConnect();
-		String sql = "delete * from member where id=?";
+		String sql = "DELETE FROM member WHERE id=?";
+		
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, member.getId());
-			rs = psmt.executeQuery();
-			if (rs.next()) {
-				MemberVO vo = new MemberVO();
-				vo.setId(rs.getString("id"));
+			psmt.setString(1, id);
+			
+			int r = psmt.executeUpdate();
+			
+			if (r > 0) {
+				System.out.println(r + "건 삭제");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			disConnect();
 		}
+		
+		
 	}
 
 	public MemberVO searchMember(String id) {

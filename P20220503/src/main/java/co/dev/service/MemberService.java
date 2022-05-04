@@ -8,8 +8,8 @@ import co.dev.vo.MemberVO;
 public class MemberService {
 	MemberDAO dao = new MemberDAO(); // db CRUD 작업을 위한 요소.
 	
-	public void memberDelete(MemberVO member) {
-		dao.deleteMember(member);
+	public void memberDelete(String id) {
+		dao.deleteMember(id);
 	}
 	
 	public void memberUpdate(MemberVO member) {
