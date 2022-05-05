@@ -39,7 +39,7 @@ public class MemberDAO extends DAO { // co.dev.DAO를 상속받음.
 			int r = psmt.executeUpdate();
 			
 			if (r > 0) {
-				System.out.println(r + "건 삭제");
+				System.out.println(r + "건 삭제되었습니다.");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

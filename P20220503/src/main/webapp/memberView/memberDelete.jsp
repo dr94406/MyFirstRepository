@@ -23,10 +23,10 @@
 	<h3>회원정보삭제</h3>
 	<form action="${pageContext.servletContext.contextPath }/memberDelete.do" method="post">
 	아이디: <input type = "text" name="id"  value="${member.id }"><br> <!--  수정하지 못 하도록 readonly 적용. -->
-	<input type="submit" value="삭제">
+	<input type="submit" value="delete">
+	</form>
 	</c:otherwise>
 	</c:choose>
-	</form>
 	<jsp:include page="home.jsp"></jsp:include>
 </body>
 </html>

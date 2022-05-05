@@ -18,10 +18,10 @@ public class FrontController extends HttpServlet { // 모든 콘트롤러를 요
 		charset = config.getInitParameter("charset");
 		list = new HashMap<String, Control>();
 		list.put("/memberInsert.do", new MemberInsertControl()); // insert control 구현클래스.
-		list.put("/memberUpdate.do", new MemberDeleteControl()); // update control 구현클래스.
+		list.put("/memberUpdate.do", new MemberUpdateControl()); // update control 구현클래스.
 		list.put("/memberList.do", new MemberListControl());
 		list.put("/memberSearch.do", new MemberSearchControl());
-		list.put("/memberDelete.do", new MemberUpdateControl());
+		list.put("/memberDelete.do", new MemberDeleteControl());
 	}
 
 	@Override

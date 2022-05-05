@@ -19,7 +19,7 @@ public class MemberUpdateControl implements Control {
 	      String pw = request.getParameter("pw");
 	      String email = request.getParameter("email");
 	      
-	      if(id.isEmpty() || name.is() || pw.isBlank() || email.isBlank()) {
+	      if(id.isEmpty() || name.isBlank() || pw.isBlank() || email.isBlank()) {
 	         request.setAttribute("error", "모든 항목을 입력하세요!");
 	         request.getRequestDispatcher("memberView/memberUpdate.jsp").forward(request, response);
 	         return;
