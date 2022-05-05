@@ -6,6 +6,13 @@ public class User {
 	private String userPassword;
 	private String userName;
 	private String userEmail;
+	private String userGender;
+	public String getUserGender() {
+		return userGender;
+	}
+	public void setUserGender(String userGender) {
+		this.userGender = userGender;
+	}
 	public String getUserID() {
 		return userID;
 	}
