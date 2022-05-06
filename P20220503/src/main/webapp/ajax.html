@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax.html</title>
+</head>
+<body>
+	<h3>Ajax 호출. (Single Page Application)</h3>
+	<form action="../memberInsert.do" method="post"
+		enctype="multipart/form-data">
+		<!-- post방식으로 전송 -->
+		아이디: <input type="text" name="id"><br> 비밀번호:<input
+			type="password" name="pw"><br> 이름: <input type="text"
+			name="name"><br> 메일: <input type="email" name="email"><br>
+		이미지: <input type="file" name="profile"><br> <input
+			type="submit" value="추가">
+	</form>
+
+	<table border="1">
+		<thead>
+			<th>아이디</th>
+			<th>회원이름</th>
+			<th>이메일</th>
+			<th>비밀번호</th>
+			<th>이미지</th>
+		</thead>
+		<tbody id="list">
+		</tbody>
+	</table>
+	
+	<script>
+		function makeTr(member = {}) {
+			let tr = document.createElement('tr');
+			
+		}
+	</script>
+</body>
+</html>

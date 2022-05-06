@@ -87,6 +87,9 @@ public class MemberDAO extends DAO { // co.dev.DAO를 상속받음.
 				vo.setName(rs.getString("name"));
 				vo.setEmail(rs.getString("email"));
 				vo.setPw(rs.getString("pw"));
+				vo.setProfile(rs.getString("profile"));
+				
+				
 				list.add(vo);
 			}
 		} catch (SQLException e) {
@@ -99,7 +102,7 @@ public class MemberDAO extends DAO { // co.dev.DAO를 상속받음.
 
 	public void insertMember(MemberVO member) {
 		conn = getConnect();
-		String sql = "insert into member(id,name,pw,email) values(?,?,?,?)";
+		String sql = "insert into member(id,name,pw,email,profile) values(?,?,?,?,?)";
 
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -107,7 +110,8 @@ public class MemberDAO extends DAO { // co.dev.DAO를 상속받음.
 			psmt.setString(2, member.getName());
 			psmt.setString(3, member.getPw());
 			psmt.setString(4, member.getEmail());
-
+			psmt.setString(5, member.getProfile());
+			
 			int r = psmt.executeUpdate();
 			System.out.println(r + "건 입력 되었습니다.");
 

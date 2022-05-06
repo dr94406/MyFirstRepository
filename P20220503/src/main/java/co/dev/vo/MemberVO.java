@@ -5,7 +5,8 @@ public class MemberVO {
 	private String name;
 	private String pw;
 	private String email;
-
+	private String profile;
+	
 	public String getId() {
 		return id;
 	}
@@ -38,9 +39,20 @@ public class MemberVO {
 		this.email = email;
 	}
 
+	public String getProfile() {
+		return profile;
+	}
+	
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
 	@Override
 	public String toString() {
-		return "MemberVO [id=" + id + ", name=" + name + ", pw=" + pw + ", email=" + email + "]";
+		return "MemberVO [id=" + id + ", name=" + name + ", pw=" + pw + ", email=" + email + ", profile=" + profile
+				+ "]";
 	}
+
+
+	
 
 }
