@@ -6,22 +6,22 @@
 </head>
 <body>
 	<h3>Ajax 호출. (Single Page Application)</h3>
-	<form action="../memberInsert.do" method="post"
-		enctype="multipart/form-data">
+	<form name ="frm" action="memberInsertJson.do" method="post" enctype="multipart/form-data">
 		<!-- post방식으로 전송 -->
-		아이디: <input type="text" name="id"><br> 비밀번호:<input
-			type="password" name="pw"><br> 이름: <input type="text"
-			name="name"><br> 메일: <input type="email" name="email"><br>
-		이미지: <input type="file" name="profile"><br> <input
-			type="submit" value="추가">
+		아이디: <input type="text" name="id"><br>
+		 비밀번호:<input type="password" name="pw"><br>
+			 이름: <input type="text" name="name"><br>
+			  메일: <input type="email" name="email"><br>
+		<!-- 이미지: <input type="file" name="profile"><br> -->
+		 <input type="submit" value="추가">
 	</form>
 
 	<table border="1">
 		<thead>
 			<th>아이디</th>
 			<th>회원이름</th>
-			<th>이메일</th>
 			<th>비밀번호</th>
+			<th>이메일</th>
 			<th>이미지</th>
 		</thead>
 		<tbody id="list">
@@ -29,11 +29,12 @@
 	</table>
 	
 	<script>
+		let fields =['id', 'name', 'email', 'pw', 'profile']
 		function makeTr(member = {}) {
 			let tr = document.createElement('tr');
-			for (let field in member) {
+			for (let field of fields) {
 				let td = document.createElement('td');
-				td.innerHTML = member[field];
+				td.innerHTML =`${member[field] ? member[field] : '' }	` ;
 				tr.append(td);
 			}
 			return tr;
@@ -45,9 +46,50 @@
 			
 			fetch('memberListJson.do')
 				.then(result => result.json())
-				.then(result1 => console.log(result1))
+				.then(result1 =>  {
+					console.log(result1); // result1이 멤버목록 배열.
+					let tlist = document.getElementById('list');
+					result1.forEach(obj => {
+					tlist.append(makeTr(obj)); // tr루핑돌림
+					});
+				})
 				.catch(error => console.log(error));
+			
+			// 업로드 버튼에 이벤트 추가.
+			let frm = document.forms.frm;
+			frm.addEventListener('submit', function(e) {
+			e.preventDefault();
+			
+			let formData = new FormData(frm); // form 태그요소 multipart 요청으로 처리.
+			for(let keyVal of formData.entries()) {
+				console.log(keyVal + ", " + keyVal[0] + ", " + keyVal[1]); // []
+			}
+			// url, 요청방식 {}
+			fetch(frm.action, {
+				method: 'post',
+				headers: {'Content-type': 'application/x-www-form-urlencoded'},
+				body: formDataToEncoding(formData)
+				})
+				.then(data => data.json()) // json형식 출력.
+				.then(result => {
+					console.log(result);
+					document.getElementById('list').append(makeTr(result));
+				})
+				.catch(error => console.log(error));
+			});
 		}
+		init();
+		
+		function formDataToEncoding(frmData = []) {
+		// id=user1&name=Hong&passwd=1234&email=hong@email.com	
+		let ary = [];
+		for(let keyVal of frmData.entries()) {
+			ary.push(keyVal[0] + '=' + keyVal[1]); // id=hong
+		}
+		return ary.join('&'); // 배열에 데이터를 문자열로 담아주는데, &을 구분자로 해서 담아주겠습니다.
+	
+		}
+		
 	</script>
 </body>
 </html>

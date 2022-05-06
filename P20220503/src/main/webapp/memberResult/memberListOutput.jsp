@@ -21,6 +21,7 @@
 						<th>이름</th>
 						<th>이메일</th>
 						<th>비밀번호</th>
+						<th>이미지</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -30,6 +31,7 @@
 							<td>${member.name }</td>
 							<td>${member.email }</td>
 							<td>${member.pw }</td>
+							
 							<td>
 							<c:if test="${! empty member.profile }">
 							<img width="70px"

@@ -25,6 +25,7 @@ public class FrontController extends HttpServlet { // 모든 콘트롤러를 요
 		
 		// json 관련 등록
 		list.put("/memberListJson.do", new MemberListJson());
+		list.put("/memberInsertJson.do", new MemberInsertJson());
 	}
 
 	@Override
