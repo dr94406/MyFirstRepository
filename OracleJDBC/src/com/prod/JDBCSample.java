@@ -1,4 +1,4 @@
-package com.prod;
+package src.com.prod;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,4 +1,4 @@
-package com.prod.emp;
+package src.com.prod.emp;
 
 import java.util.List;
 import java.util.Scanner;

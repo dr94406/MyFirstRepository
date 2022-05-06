@@ -1,4 +1,4 @@
-package com.prod.emp;
+package src.com.prod.emp;
 
 public class Employee {
 	// employees의 테이블의 칼럼에 해당되는 필드설정.
