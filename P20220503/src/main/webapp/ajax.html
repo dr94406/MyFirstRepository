@@ -31,8 +31,15 @@
 	<script>
 		function makeTr(member = {}) {
 			let tr = document.createElement('tr');
-			
+			for (let field in member) {
+				let td = document.createElement('td');
+				td.innerHTML = member[field];
+				tr.append(td);
+			}
+			return tr;
 		}
+		
+		
 	</script>
 </body>
 </html>
