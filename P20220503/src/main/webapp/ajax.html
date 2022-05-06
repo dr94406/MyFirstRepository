@@ -39,7 +39,15 @@
 			return tr;
 		}
 		
-		
+		function init() {
+			// 서버에서 회원리스트 => 화면출력.
+			let ajax = new XMLHttpRequest();
+			
+			fetch('memberListJson.do')
+				.then(result => result.json())
+				.then(result1 => console.log(result1))
+				.catch(error => console.log(error));
+		}
 	</script>
 </body>
 </html>
