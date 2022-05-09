@@ -9,5 +9,6 @@ public class ByteToStringExample {
 
 		String str2 = new String(bytes, 6, 4);
 		System.out.println(str2);
+
 	}
 }
