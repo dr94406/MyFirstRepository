@@ -5,30 +5,33 @@
 	id="WebApp_ID" version="4.0">
 	<display-name>P20220503</display-name>
 
-<listener>
-    <listener-class>org.apache.tiles.extras.complete.CompleteAutoloadTilesListener</listener-class>
-</listener>
-
-<servlet>
-    <servlet-name>Tiles Dispatch Servlet</servlet-name>
-    <servlet-class>org.apache.tiles.web.util.TilesDispatchServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>Tiles Dispatch Servlet</servlet-name>
-    <url-pattern>*.tiles</url-pattern>
-</servlet-mapping>
+	<listener>
+		<listener-class>org.apache.tiles.extras.complete.CompleteAutoloadTilesListener</listener-class>
+	</listener>
 
 	<servlet>
-	<servlet-name>front</servlet-name>
-	<servlet-class>co.dev.web.FrontController</servlet-class>
+		<servlet-name>Tiles Dispatch Servlet</servlet-name>
+		<servlet-class>org.apache.tiles.web.util.TilesDispatchServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-	<servlet-name>front</servlet-name>
-	<url-pattern>*.do</url-pattern>	
+		<servlet-name>Tiles Dispatch Servlet</servlet-name>
+		<url-pattern>*.tiles</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>front</servlet-name>
+		<servlet-class>co.dev.web.FrontController</servlet-class>
+		<init-param>
+			<param-name>charset</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>front</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
-
 	</welcome-file-list>
 </web-app>

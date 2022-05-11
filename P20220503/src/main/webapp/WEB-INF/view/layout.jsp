@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,12 +16,12 @@
     </head>
     <body>
         <div class="d-flex" id="wrapper">
-            <!-- Sidebar-->
-        	<tiles:insertAttribute name="menu" />
+        	<!-- sidebar -->
+            <tiles:insertAttribute name="menu" />
             <!-- Page content wrapper-->
             <div id="page-content-wrapper">
-				<!-- header -->    
-				<tiles:insertAttribute name="header" />          
+                <!-- header -->
+                <tiles:insertAttribute name="header" />
                 <!-- Page content-->
                 <div class="container-fluid">
                     <tiles:insertAttribute name="body" />

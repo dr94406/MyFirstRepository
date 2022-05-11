@@ -7,20 +7,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import co.dev.service.MemberService;
+import co.dev.service.MerberService;
 import co.dev.vo.MemberVO;
 
 public class MemberListControl implements Control {
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse reponse) throws ServletException, IOException {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 
-		MemberService service = new MemberService();
+		MerberService service = new MerberService();
 		List<MemberVO> list = service.memberList();
 
 		request.setAttribute("all", list);
-		request.getRequestDispatcher("memberResult/memberListOutput.tiles").forward(request, reponse);
-		
+
+		request.getRequestDispatcher("memberResult/memberListOutput.tiles").forward(request, response);
+
 	}
 
 }
